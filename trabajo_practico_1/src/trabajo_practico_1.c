@@ -7,55 +7,84 @@
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
-
-
-
 #include "funciones.c"
 
-int main(void) {
 
+int main(void) {
+	logo;
+system("pause");
 	int opcion;
 	int validacion;
 	float A;
-	float B;
-	float Respuesta = 0 ;
-	A=ingresarNumero("\ningrese el primer numero\n");
+	float B = 0;
+	float respuesta = 0 ;
 	do{
-		printf("%f\n",A);
-	validacion = menuNumerico(&opcion,7,0,3," esta en el menu|elija una opcion.","error, opcion incorrecta",
-	"| 0 menu |\n| 1 sumar |\n| 2 restar |\n|3 funcion 3|\n|4 funcion 4|\n|5 para 5|\n|6 clear|\n|7 salir|");
+
+	validacion = menuNumerico(&opcion,7,1,3,"elija una opcion.","error, opcion incorrecta",
+    "________________________\n|  1 -> suma           |\n|  2 -> resta          |\n|  3 -> division       |\n|  4 -> multiplicacion |\n|  5 -> factorial      |\n|  6 -> salir          |\n________________________");
 	if(validacion)
 		{
 
 			switch(opcion)
 			{
-				case 1:
-					printf("suma\n");
 					break;
-				case 2:
-					printf("resta\n");
+				case 1:// suma
+					A=ingresarNumeroFloat("\ningrese A\n");
+					system("cls");
+					printf("%f +",A);
+					B=ingresarNumeroFloat("\ningrese B\n");
+					system("cls");
+					respuesta=sumar(A,B);
+					printf("%f + %f = %f \n",A,B,respuesta);
+					system("pause");
 					break;
-				case 3:
-					printf("la opcion selecionada es = %d\n",opcion);
+				case 2://resta
+					A=ingresarNumeroFloat("\ningrese A\n");
+					system("cls");
+					printf("%f -",A);
+					B=ingresarNumeroFloat("\ningrese B\n");
+					system("cls");
+					respuesta=restar(A,B);
+					printf("%f - %f = %f \n",A,B,respuesta);
+					system("pause");
 					break;
-				case 4:
-					printf("la opcion selecionada es = %d\n",opcion);
+				case 3://division
+					A=ingresarNumeroFloat("\ningrese A\n");
+					system("cls");
+					printf("%f -",A);
+					B=ingresarNumeroFloat("\ningrese B\n");
+					if(B==0)
+						{
+							printf("Error!!,no se puede dividir por 0");
+						}else
+							{
+							system("cls");
+							respuesta=dividir(A,B);
+							printf("%f / %f = %f \n",A,B,respuesta);
+							}
+					system("pause");
+					break;
+				case 4://multiplicacion
+					A=ingresarNumeroFloat("\ningrese A\n");
+					system("cls");
+					printf("%f -",A);
+					B=ingresarNumeroFloat("\ningrese B\n");
+					system("cls");
+					respuesta=multiplicar(A,B);
+					printf("%f - %f = %f \n",A,B,respuesta);
+					system("pause");
+					break;
 					break;
 				case 5:
 					printf("la opcion selecionada es = %d\n",opcion);
 					break;
-				case 6:
-					A=ingresarNumero("\ningrese el primer numero\n");
-					break;
-				case 7:
+				default:
 					printf("hasta la proximaaaaaaaaaaaaaaa\n");
 					break;
-				default:
-					continue;
 
 			}
 
 		}
-	}while(opcion!=6);
+	}while(opcion<6);
 	return 0;
 }

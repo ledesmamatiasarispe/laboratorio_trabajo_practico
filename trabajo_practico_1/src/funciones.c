@@ -1,20 +1,23 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "funciones.h"
 
 int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaje [],char mensajeError[],char opciones[])
 {
 	int devolucion=-1;
 	int numeroIngresado;
-	if(pValorIngresado!=NULL && max >= min && reintentos !=NULL && mensaje != NULL
+	if(pValorIngresado!=NULL && max >= min && reintentos !=0 && mensaje != NULL
 		&& mensajeError != NULL  )
 	{
-		printf("%s", opciones);
-
 		for(int i = reintentos;i>=0;i--)
 		{
 			devolucion=0;
-			numeroIngresado = ingresarNumero(mensaje);
+			printf("%s\n", opciones);
+			numeroIngresado = ingresarNumeroInt(mensaje);
+
+			system("cls");
+
 			if(numeroIngresado>=min && numeroIngresado<=max)
 			{
 				devolucion = 1;
@@ -24,10 +27,10 @@ int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaj
 			{
 				if(i == 1)
 				{
-					printf("se ha quedado sin reintentos");
+					printf("se ha quedado sin reintentos\n");
 					break;
 				}else{
-					printf("%s valor maximo %d y valor minimo %d",mensajeError,max,min);
+					printf("%s valor maximo %d y valor minimo %d\n",mensajeError,max,min);
 				}
 			}
 		}
@@ -35,7 +38,7 @@ int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaj
 	return devolucion;
 }
 
-int ingresarNumero(char mensaje[])
+int ingresarNumeroInt(char mensaje[])
 {
 	int numeroIngresado;
 	printf("%s",mensaje);
@@ -43,11 +46,50 @@ int ingresarNumero(char mensaje[])
 	return numeroIngresado;
 }
 
+float ingresarNumeroFloat(char mensaje[])
+{
+	float numeroIngresado;
+	printf("%s",mensaje);
+	scanf("%f",&numeroIngresado);
+	return numeroIngresado;
+}
+
+float sumar(float X,float Y)
+{
+	float resultado;
+	resultado = X + Y;
+	return resultado;
+}
+float restar(float X,float Y)
+{
+	float resultado;
+	resultado = X - Y;
+	return resultado;
+}
+float multiplicar(float X,float Y)
+{
+	float resultado;
+	resultado = X * Y;
+	return resultado;
+}
+
+
+float dividir(float X,float Y)
+{
+	float resultado;
+	resultado = X / Y;
+	return resultado;
+}
 
 
 
 
 
+void logo(void){
+
+printf("%s\n%s\n%s\n%s\n%s\n%s\n%s",logo1,logo2,logo3,logo4,logo5,logo6);
+
+}
 
 
 
