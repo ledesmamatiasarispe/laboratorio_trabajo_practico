@@ -76,13 +76,11 @@ int main(void) {
 					system("pause");
 					break;
 				case 5:
-					A=ingresarNumeroFloat("\ningrese A\n");
+					A=ingresarNumeroInt("\ningrese A\n");
 					system("cls");
-					printf("%f -",A);
-					B=ingresarNumeroFloat("\ningrese B\n");
-					system("cls");
-					respuesta=factorial(A,B);
-					printf("%f - %f = %f \n",A,B,respuesta);
+					printf("%d -",A);
+					respuesta=factorial(A);
+					printf("%d = %d \n",A,respuesta);
 					system("pause");
 					break;
 				default:
