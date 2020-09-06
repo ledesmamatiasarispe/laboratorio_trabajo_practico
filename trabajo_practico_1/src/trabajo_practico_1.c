@@ -13,21 +13,49 @@
 #include "funciones.c"
 
 int main(void) {
-	setvbuf(stdout,NULL,_IONBF,0);
-	char  opcionesDelMenu[] = "ingrese 1 para funcion 1\ningrese 2 para funcion 2\ningrese 3 para funcion 3\ningrese 4 para funcion 4\ningrese 5 para funcion 5\n";
 
-
-
-
-
-
-	printf("%s", opcionesDelMenu);
 	int opcion;
 	int validacion;
-	validacion = pedirNumero(&opcion,6,1,4,"ingrese un numero","error, reintente nuevamente");
+	float A;
+	float B;
+	float Respuesta = 0 ;
+	A=ingresarNumero("\ningrese el primer numero\n");
+	do{
+		printf("%f\n",A);
+	validacion = menuNumerico(&opcion,7,0,3," esta en el menu|elija una opcion.","error, opcion incorrecta",
+	"| 0 menu |\n| 1 sumar |\n| 2 restar |\n|3 funcion 3|\n|4 funcion 4|\n|5 para 5|\n|6 clear|\n|7 salir|");
 	if(validacion)
-	{
-		printf("valido");
-	}
+		{
+
+			switch(opcion)
+			{
+				case 1:
+					printf("suma\n");
+					break;
+				case 2:
+					printf("resta\n");
+					break;
+				case 3:
+					printf("la opcion selecionada es = %d\n",opcion);
+					break;
+				case 4:
+					printf("la opcion selecionada es = %d\n",opcion);
+					break;
+				case 5:
+					printf("la opcion selecionada es = %d\n",opcion);
+					break;
+				case 6:
+					A=ingresarNumero("\ningrese el primer numero\n");
+					break;
+				case 7:
+					printf("hasta la proximaaaaaaaaaaaaaaa\n");
+					break;
+				default:
+					continue;
+
+			}
+
+		}
+	}while(opcion!=6);
 	return 0;
 }

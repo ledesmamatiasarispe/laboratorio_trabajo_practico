@@ -5,4 +5,15 @@
   * @param pRespuesta does this (hace algo)
   * @authr some user (this is the documentation keyword error)
   */
-int pedirNumero(int* ,int ,int ,int ,char  [],char []);
+int menuNumerico(int* ,int ,int ,int ,char  [],char [],char[])
+
+/** @brief ingresarNumero devuelve un numero pedido por scanf.
+*/;
+int ingresarNumero(char[]);
+
+int suma();
+
+int resta();
+
+
+
