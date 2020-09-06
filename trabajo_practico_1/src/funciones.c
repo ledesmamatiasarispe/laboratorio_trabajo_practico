@@ -81,15 +81,17 @@ float dividir(float X,float Y)
 	return resultado;
 }
 
-
-
-
-
-void logo(void){
-
-printf("%s\n%s\n%s\n%s\n%s\n%s\n%s",logo1,logo2,logo3,logo4,logo5,logo6);
-
+int factorial(int X)
+{
+	//x*(x-1) => X==0
+	int long unsigned respuesta=1;
+	for(;X >=0 ;X--)
+	{
+	respuesta *= X;
+	}
+	return respuesta;
 }
+
 
 
 

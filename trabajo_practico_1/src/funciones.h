@@ -1,13 +1,12 @@
 
 
 /**
-  * This is a documentation comment block
-  * @param pRespuesta does this (hace algo)
-  * @authr some user (this is the documentation keyword error)
+  * \param pRespuesta does this (hace algo)
+  * \authr some user (this is the documentation keyword error)
   */
 int menuNumerico(int* ,int ,int ,int ,char  [],char [],char[])
 
-/** @brief ingresarNumero devuelve un numero pedido por scanf.
+/** \brief ingresarNumero devuelve un numero pedido por scanf.
 */;
 int ingresarNumeroInt(char[]);
 
@@ -21,6 +20,7 @@ float multiplicar(float X,float Y);
 
 float dividir(float X,float Y);
 
+int factorial(int X);
 
 
 
@@ -33,18 +33,4 @@ float dividir(float X,float Y);
 
 
 
-
-
-
-
-
-
-
-void logo(void);
-char extern logo1 [] ="asdfasdf████████╗██████╗  █████╗ ██████╗  █████╗      ██╗ ██████╗     ██████╗ ██████╗  █████╗  ██████╗████████╗██╗ ██████╗ ██████╗      ██╗";
-char extern logo2 [] ="╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗     ██║██╔═══██╗    ██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██║██╔════╝██╔═══██╗    ███║";
-char extern logo3 [] ="   ██║   ██████╔╝███████║██████╔╝███████║     ██║██║   ██║    ██████╔╝██████╔╝███████║██║        ██║   ██║██║     ██║   ██║    ╚██║";
-char extern logo4 [] ="   ██║   ██╔══██╗██╔══██║██╔══██╗██╔══██║██   ██║██║   ██║    ██╔═══╝ ██╔══██╗██╔══██║██║        ██║   ██║██║     ██║   ██║     ██║";
-char extern logo5 [] ="   ██║   ██║  ██║██║  ██║██████╔╝██║  ██║╚█████╔╝╚██████╔╝    ██║     ██║  ██║██║  ██║╚██████╗   ██║   ██║╚██████╗╚██████╔╝     ██║";
-char extern logo6 [] ="   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚════╝  ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═════╝      ╚═╝";
 

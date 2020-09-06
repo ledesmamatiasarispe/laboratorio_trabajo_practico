@@ -1,18 +1,16 @@
 /*
  ============================================================================
  Name        : trabajo_practico_1.c
- Author      :
+ Author      : Matias Arispe Ledesma
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Calculadora de consola.
  ============================================================================
  */
 #include "funciones.c"
 
 
 int main(void) {
-	logo;
-system("pause");
 	int opcion;
 	int validacion;
 	float A;
@@ -21,7 +19,10 @@ system("pause");
 	do{
 
 	validacion = menuNumerico(&opcion,7,1,3,"elija una opcion.","error, opcion incorrecta",
-    "________________________\n|  1 -> suma           |\n|  2 -> resta          |\n|  3 -> division       |\n|  4 -> multiplicacion |\n|  5 -> factorial      |\n|  6 -> salir          |\n________________________");
+    "________________________\n|  1 -> suma           |\n| "
+    " 2 -> resta          |\n|  3 -> division       |\n| "
+    " 4 -> multiplicacion |\n|  5 -> factorial      |\n| "
+    " 6 -> salir          |\n________________________");
 	if(validacion)
 		{
 
@@ -74,9 +75,15 @@ system("pause");
 					printf("%f - %f = %f \n",A,B,respuesta);
 					system("pause");
 					break;
-					break;
 				case 5:
-					printf("la opcion selecionada es = %d\n",opcion);
+					A=ingresarNumeroFloat("\ningrese A\n");
+					system("cls");
+					printf("%f -",A);
+					B=ingresarNumeroFloat("\ningrese B\n");
+					system("cls");
+					respuesta=factorial(A,B);
+					printf("%f - %f = %f \n",A,B,respuesta);
+					system("pause");
 					break;
 				default:
 					printf("hasta la proximaaaaaaaaaaaaaaa\n");
