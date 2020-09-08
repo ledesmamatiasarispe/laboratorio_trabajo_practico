@@ -83,7 +83,7 @@ float dividir(float X,float Y)
 int factorial(int X)
 {
 	//x*(x-1) => X==0
-	int respuesta;
+	unsigned long int respuesta;
 
 	for(respuesta = 1 ; X > 0 ;X--)
 	{
@@ -95,7 +95,7 @@ int factorial(int X)
 void barraDeProgresoTotalmenteInnecesaria(void)
 
 {
-							printf("\n calculando!_                            _");
+						printf("\n calculando!_                            _");
 						system("cls");
 						printf("\n calculando!___                          _");
 						system("cls");
@@ -109,15 +109,39 @@ void barraDeProgresoTotalmenteInnecesaria(void)
 						system("cls");
 						printf("\n calculando!________________             _");
 						system("cls");
-						printf("\n calculando!_____________________        _");
+						printf("\n calculando!____________________         _");
 						system("cls");
-						printf("\n calculando!______________________       _");
+						printf("\n calculando!_______________________      _");
 						system("cls");
 						printf("\n calculando!_________________________    _");
 						system("cls");
-						printf("\n calculando!______________________________");
+						printf("\n completado!______________________________");
 						system("pause");
 }
 
+void barraDeProgresoTotalmenteInnecesaria2(void)
 
-
+{
+						printf("\n cargando!~                            ~");
+						system("cls");
+						printf("\n cargando!~~~                          ~");
+						system("cls");
+						printf("\n cargando!~~~~~                        ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~                      ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~                    ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~~~                  ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~~~~~~~~             ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~~~~~~~~~~~~         ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~~~~~~~~~~~~~~~      ~");
+						system("cls");
+						printf("\n cargando!~~~~~~~~~~~~~~~~~~~~~~~~~    ~");
+						system("cls");
+						printf("\n completado!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+						system("pause");
+}

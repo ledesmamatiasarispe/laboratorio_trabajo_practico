@@ -13,18 +13,22 @@
 int main(void) {
 	int menuOpcionSeleccionada;
 	int menuValido;
-	float numero_A = 5.3;
-	float numero_B = 4.7;
+	float numero_A = 0;
+	float numero_B = 0;
 
 	float respuestaSuma;
 	float respuestaResta;
 	float respuestaDivision;
 	float respuestaMultiplicacion;
-	int factorialValorNumeroA;
-	int factorialValorNumeroB;
+	unsigned long int  factorialValorNumeroA;
+	unsigned long int  factorialValorNumeroB;
+
+	system("color 02");
+	barraDeProgresoTotalmenteInnecesaria2();
+	system("cls");
 	do{
 	printf("\n  A = %f   |   B = %f  ",numero_A,numero_B);
-	menuValido = calculadoraMenuNumerico(&menuOpcionSeleccionada,7,1,3,"elija una opcion.","error, opcion incorrecta",
+	menuValido = calculadoraMenuNumerico(&menuOpcionSeleccionada,6,1,3,"elija una opcion.","error, opcion incorrecta",
 	"\n ______________________________"
     "\n|1 -> ingresar A               |"
     "\n|2 -> ingresar B               |"
@@ -75,16 +79,20 @@ int main(void) {
 					system("pause");
 
 					break;
-
+				case 5:
+					("hasta la proximaaaaaaaaaaaaaaa\n");
+					break;
 
 
 				default:
-					printf("hasta la proximaaaaaaaaaaaaaaa\n");
+					 ERROR1();
+					return 0;
+
 					break;
 
 			}
 		system("cls");
 		}
 	}while(menuOpcionSeleccionada!=5);
-	return 0;
+	return 1;
 }
