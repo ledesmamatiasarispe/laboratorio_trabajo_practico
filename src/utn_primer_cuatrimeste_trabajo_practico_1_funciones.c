@@ -1,18 +1,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "funciones.h"
-
-int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaje [],char mensajeError[],char opciones[])
+#include "utn_primer_cuatrimeste_trabajo_practico_1_funciones.h"
+int calculadoraMenuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaje [],char mensajeError[],char opciones[])
 {
-	int devolucion=-1;
+	int funcionRegresa=-1;
 	int numeroIngresado;
 	if(pValorIngresado!=NULL && max >= min && reintentos !=0 && mensaje != NULL
 		&& mensajeError != NULL  )
 	{
 		for(int i = reintentos;i>=0;i--)
 		{
-			devolucion=0;
+			funcionRegresa=0;
 			printf("%s\n", opciones);
 			numeroIngresado = ingresarNumeroInt(mensaje);
 
@@ -20,7 +19,7 @@ int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaj
 
 			if(numeroIngresado>=min && numeroIngresado<=max)
 			{
-				devolucion = 1;
+				funcionRegresa = 1;
 				*pValorIngresado = numeroIngresado;
 				break;
 			}else
@@ -35,13 +34,13 @@ int menuNumerico(int* pValorIngresado,int max,int min,int reintentos,char mensaj
 			}
 		}
 	}
-	return devolucion;
+	return funcionRegresa;
 }
 
 int ingresarNumeroInt(char mensaje[])
 {
 	int numeroIngresado;
-	printf("%s",mensaje);
+	printf("%s\n",mensaje);
 	scanf("%d",&numeroIngresado);
 	return numeroIngresado;
 }
@@ -84,15 +83,41 @@ float dividir(float X,float Y)
 int factorial(int X)
 {
 	//x*(x-1) => X==0
-	int long unsigned respuesta=1;
-	for(;X >=0 ;X--)
+	int respuesta;
+
+	for(respuesta = 1 ; X > 0 ;X--)
 	{
 	respuesta *= X;
 	}
 	return respuesta;
 }
 
+void barraDeProgresoTotalmenteInnecesaria(void)
 
+{
+							printf("\n calculando!_                            _");
+						system("cls");
+						printf("\n calculando!___                          _");
+						system("cls");
+						printf("\n calculando!_____                        _");
+						system("cls");
+						printf("\n calculando!_______                      _");
+						system("cls");
+						printf("\n calculando!_________                    _");
+						system("cls");
+						printf("\n calculando!___________                  _");
+						system("cls");
+						printf("\n calculando!________________             _");
+						system("cls");
+						printf("\n calculando!_____________________        _");
+						system("cls");
+						printf("\n calculando!______________________       _");
+						system("cls");
+						printf("\n calculando!_________________________    _");
+						system("cls");
+						printf("\n calculando!______________________________");
+						system("pause");
+}
 
 
 
