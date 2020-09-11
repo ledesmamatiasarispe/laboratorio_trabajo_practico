@@ -142,6 +142,6 @@ void barraDeProgresoTotalmenteInnecesaria2(void)
 						system("cls");
 						printf("\n cargando!~~~~~~~~~~~~~~~~~~~~~~~~~    ~");
 						system("cls");
-						printf("\n completado!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+						printf("\n completado!~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 						system("pause");
 }

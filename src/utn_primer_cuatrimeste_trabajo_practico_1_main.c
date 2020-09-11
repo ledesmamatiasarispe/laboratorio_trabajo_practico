@@ -38,24 +38,19 @@ int main(void) {
     "\n|______________________________|");
 	if(menuValido)
 		{
-
 			switch(menuOpcionSeleccionada)
 			{
-
 				case 1:
 						numero_A=ingresarNumeroFloat("ingrese A = ");
-
 					break;
 				case 2:
 						numero_B=ingresarNumeroFloat("ingrese B = ");
-
 					break;
 				case 3:
 						respuestaSuma = sumar(numero_A,numero_B);
 						respuestaResta = restar(numero_A,numero_B);
 						respuestaDivision = dividir(numero_A,numero_B);
 						respuestaMultiplicacion = multiplicar(numero_A,numero_B);
-
 					    factorialValorNumeroA = factorial((int)numero_A);
 						factorialValorNumeroB = factorial((int)numero_B);//sera legal hacer esto?
 						barraDeProgresoTotalmenteInnecesaria();
@@ -69,7 +64,6 @@ int main(void) {
 					{
 						printf("\n| A/B = NO se puede dividir por cero");
 					}else{
-
 							printf("\n| A/B = %f",respuestaDivision);
 					}
 					printf("\n| A*B = %f",respuestaMultiplicacion);
@@ -77,19 +71,14 @@ int main(void) {
 					printf("\n| B! =  %d",factorialValorNumeroB);
 					printf("\n|______________________________\n");
 					system("pause");
-
 					break;
 				case 5:
 					("hasta la proximaaaaaaaaaaaaaaa\n");
 					break;
-
-
 				default:
 					 ERROR1();
 					return 0;
-
 					break;
-
 			}
 		system("cls");
 		}
