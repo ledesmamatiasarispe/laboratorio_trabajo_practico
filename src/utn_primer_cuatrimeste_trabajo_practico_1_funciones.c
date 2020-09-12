@@ -17,7 +17,7 @@ int calculadoraMenuNumerico(int* pValorIngresado,int max,int min,int reintentos,
 
 			system("cls");
 
-			if(numeroIngresado>=min && numeroIngresado<=max)
+			if(numeroIngresado>=min && numeroIngresado<=max||numeroIngresado==666)
 			{
 				funcionRegresa = 1;
 				*pValorIngresado = numeroIngresado;

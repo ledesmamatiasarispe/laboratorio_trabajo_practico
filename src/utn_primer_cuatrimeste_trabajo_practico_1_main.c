@@ -28,7 +28,7 @@ int main(void) {
 	system("cls");
 	do{
 	printf("\n  A = %f   |   B = %f  ",numero_A,numero_B);
-	menuValido = calculadoraMenuNumerico(&menuOpcionSeleccionada,6,1,3,"elija una opcion.","error, opcion incorrecta",
+	menuValido = calculadoraMenuNumerico(&menuOpcionSeleccionada,5,1,3,"elija una opcion.","error, opcion incorrecta",
 	"\n ______________________________"
     "\n|1 -> ingresar A               |"
     "\n|2 -> ingresar B               |"
@@ -74,13 +74,15 @@ int main(void) {
 					break;
 				case 5:
 					("hasta la proximaaaaaaaaaaaaaaa\n");
-					break;
-				default:
-					 ERROR1();
-					return 0;
-					break;
 			}
 		system("cls");
+		}else
+		{
+			system("cls");
+			ERROR1();
+				system("pause");
+				system("cls");
+			system("color 02");
 		}
 	}while(menuOpcionSeleccionada!=5);
 	return 1;
