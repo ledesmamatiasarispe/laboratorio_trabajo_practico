@@ -17,7 +17,7 @@ int calculadoraMenuNumerico(int* pValorIngresado,int max,int min,int reintentos,
 
 			system("cls");
 
-			if(numeroIngresado>=min && numeroIngresado<=max||numeroIngresado==666)
+			if(numeroIngresado>=min && numeroIngresado<=max)
 			{
 				funcionRegresa = 1;
 				*pValorIngresado = numeroIngresado;
@@ -41,6 +41,7 @@ int ingresarNumeroInt(char mensaje[])
 {
 	int numeroIngresado;
 	printf("%s\n",mensaje);
+	fflush(stdin);
 	scanf("%d",&numeroIngresado);
 	return numeroIngresado;
 }
@@ -49,6 +50,7 @@ float ingresarNumeroFloat(char mensaje[])
 {
 	float numeroIngresado;
 	printf("%s",mensaje);
+	fflush(stdin);
 	scanf("%f",&numeroIngresado);
 	return numeroIngresado;
 }
