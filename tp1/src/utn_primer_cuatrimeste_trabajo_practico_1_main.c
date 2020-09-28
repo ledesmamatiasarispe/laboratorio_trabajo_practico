@@ -20,8 +20,8 @@ int main(void) {
 	float respuestaResta;
 	float respuestaDivision;
 	float respuestaMultiplicacion;
-	unsigned long int  factorialValorNumeroA;
-	unsigned long int  factorialValorNumeroB;
+	float  factorialValorNumeroA;
+	float  factorialValorNumeroB;
 
 	system("color 02");
 	barraDeProgresoTotalmenteInnecesaria2();
@@ -51,8 +51,8 @@ int main(void) {
 						respuestaResta = restar(numero_A,numero_B);
 						respuestaDivision = dividir(numero_A,numero_B);
 						respuestaMultiplicacion = multiplicar(numero_A,numero_B);
-					    factorialValorNumeroA = factorial((int)numero_A);
-						factorialValorNumeroB = factorial((int)numero_B);//sera legal hacer esto?
+					    factorialValorNumeroA = factorial(numero_A);
+						factorialValorNumeroB = factorial(numero_B);//sera legal hacer esto?
 						barraDeProgresoTotalmenteInnecesaria();
 					break;
 				case 4:
@@ -67,8 +67,12 @@ int main(void) {
 							printf("\n| A/B = %f",respuestaDivision);
 					}
 					printf("\n| A*B = %f",respuestaMultiplicacion);
-					printf("\n| A! =  %d",factorialValorNumeroA);
-					printf("\n| B! =  %d",factorialValorNumeroB);
+
+
+					printf("\n| A! =  %f",factorialValorNumeroA);
+					printf("\n| B! =  %f",factorialValorNumeroB);
+
+
 					printf("\n|______________________________\n");
 					system("pause");
 					break;

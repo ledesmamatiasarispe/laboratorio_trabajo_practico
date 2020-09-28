@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1601157879 source:c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\control.c
+	"control.h"
+
+1601138292 c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\control.h
+
+1601177864 source:c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+
+1601178362 c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\utn.h
+
+1601249879 source:c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\employee.c
+	"employee.h"
+	"unt_ingresoDeDatos.h"
+	<stdio.h>
+	<string.h>
+
+1601222785 c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\employee.h
+
+1601249591 source:c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\main.c
+	"unt_ingresoDeDatos.h"
+	<stdio.h>
+	<stdlib.h>
+	"employee.h"
+	"control.h"
+
+1601250770 source:c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\unt_ingresodedatos.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"unt_ingresoDeDatos.h"
+
+1601237518 c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\unt_ingresodedatos.h
+

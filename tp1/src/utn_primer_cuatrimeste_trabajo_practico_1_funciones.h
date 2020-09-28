@@ -16,66 +16,62 @@
 int calculadoraMenuNumerico(int* ,int ,int ,int ,char  [],char [],char[]);
 
 /**
-*brief pide un numero y lo retorna
-*param char[] es el mensaje que muestra al pedir el numero
-*return un int que se pide por scanf
+*@brief pide un numero y lo retorna
+*@param char[] es el mensaje que muestra al pedir el numero
+*@return un int que se pide por scanf
 */
 int ingresarNumeroInt(char[]);
 
 /**
-*brief pide un numero y lo retorna
-*param char[] es el mensaje que muestra al pedir el numero
-*return un float que se pide por scanf
+*@brief pide un numero y lo retorna
+*@param char[] es el mensaje que muestra al pedir el numero
+*@return un float que se pide por scanf
 */
 float ingresarNumeroFloat(char[]);
 
 /**
-*brief suma dos float y devuelve el resultado
-*param float un numero
-*return el resultado de la suma
+*@brief suma dos float y devuelve el resultado
+*@param float un numero
+*@return el resultado de la suma
 */
 float sumar(float , float);
 
 /**
-*brief resta dos float y devuelve el resultado
-*param float un numero
-*return el resultado de la resta
+*@brief resta dos float y devuelve el resultado
+*@param float un numero
+*@return el resultado de la resta
 */
 float restar(float ,float );
 
 /**
-*brief multiplica dos float y devuelve el resultado
-*param float un numero
-*return el resultado de la multiplicacion
+*@brief multiplica dos float y devuelve el resultado
+*@param float un numero
+*@return el resultado de la multiplicacion
 */
 float multiplicar(float ,float );
 
 /**
-*brief divide dos float y devuelve el resultado
-*param float un numero
-*return el resultado de la divicion
+*@brief divide dos float y devuelve el resultado
+*@param float un numero
+*@return el resultado de la divicion
 */
 float dividir(float ,float );
 
 /**
-*brief toma un numero y calcula su factorial
-*param un numero int
-*return devuelve el factorial de el numero
+*@brief toma un numero lo redonda y calcula su factorial
+*@param un numero int
+*@return devuelve el factorial de el numero
 */
-int factorial(int X);
+float factorial(float X);
 
 
 
 /**
-*brief es una barra de progreso que esta solo para molestar
+*@brief es una barra de progreso que esta solo para molestar
 */
 void barraDeProgresoTotalmenteInnecesaria(void);
 
 void barraDeProgresoTotalmenteInnecesaria2(void);
-
-/**
-*no ingresen el numero 666
-*/
 
 void ERROR1(void)
 {

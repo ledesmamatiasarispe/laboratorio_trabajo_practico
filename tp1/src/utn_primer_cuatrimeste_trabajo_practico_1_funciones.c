@@ -1,4 +1,4 @@
-
+#include<math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn_primer_cuatrimeste_trabajo_practico_1_funciones.h"
@@ -82,10 +82,11 @@ float dividir(float X,float Y)
 	return resultado;
 }
 
-int factorial(int X)
+float factorial(float X)
 {
 	//x*(x-1) => X==0
-	unsigned long int respuesta;
+	float respuesta;
+	X=round(X);
 
 	for(respuesta = 1 ; X > 0 ;X--)
 	{
@@ -97,9 +98,9 @@ int factorial(int X)
 void barraDeProgresoTotalmenteInnecesaria(void)
 
 {
-						printf("\n calculando!_                            _");
+						printf("\n calculando!°                            _");
 						system("cls");
-						printf("\n calculando!___                          _");
+						printf("\n calculando!°°°                          _");
 						system("cls");
 						printf("\n calculando!_____                        _");
 						system("cls");
