@@ -368,7 +368,7 @@ int getValidFloats(char requestMessage[],char errorMessage[], float* input,float
         if (!getStringNumerosFlotantes(requestMessage,auxStr))
         {
             printf ("%s",errorMessage);
-           break;
+          // break;
             continue;
 
         }

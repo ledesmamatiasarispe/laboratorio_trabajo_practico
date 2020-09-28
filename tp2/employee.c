@@ -56,6 +56,7 @@ int emp_addEmployee(eEmployee employeelist[], int len)
         float salarioAuxFloat;
         int sectorAuxInt;
         int emptyIndex;
+        char nombreAux[51],apellidoAux[51],validacionAux;
         int reintentos=3;
         if(getFirstEmptyIndex(employeelist,len,&emptyIndex)==0)//este if verifica si hay espacio
         {
@@ -65,19 +66,43 @@ int emp_addEmployee(eEmployee employeelist[], int len)
         }else//y si hay espacio este else modifica los datos
         {
             //se ingresan los datos;
-            emp_SetId(employeelist,-1,emptyIndex);
 
-            getValidNames("ingrese el nombre = ","\nError! intente nuevamente",
-                          "\nError! the name must not exceed 51 characters ",employeelist[emptyIndex].name,51,reintentos);
-            getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
-                          "\nError!last name must not exceed 51 characters ",employeelist[emptyIndex].lastName,51,reintentos);
-            getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,reintentos);
-            getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,reintentos);
+            do{
 
+            if(emp_SetId(employeelist,-1,emptyIndex) == -1)
+            {
+                break;
+            }
+            if(getValidNames("ingrese el nombre = ","\nError! intente nuevamente",
+                          "\nError! the name must not exceed 51 characters ",&nombreAux,51,reintentos) == -1)
+            {
+                break;
+            }
+             if(getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
+                          "\nError!last name must not exceed 51 characters ",&apellidoAux,51,reintentos) == -1)
+            {
+                break;
+            }
+            if(getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,reintentos) == -1)
+            {
+                break;
+            }
+             if(getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,reintentos) == -1)
+            {
+                break;
+            }
 
-            employeelist[emptyIndex].sector = sectorAuxInt;
-            employeelist[emptyIndex].salary = salarioAuxFloat;
-            employeelist[emptyIndex].isEmpty = FALSE;
+            validacionAux = getChar("confirmar ingreso de datos 'Y', 'N'");
+            }while(validacionAux != 'Y' && validacionAux != 'y');
+
+            if(validacionAux == 'Y' && validacionAux == 'y')
+            {
+                strcpy(employeelist[emptyIndex].lastName , apellidoAux);
+                strcpy(employeelist[emptyIndex].name , nombreAux);
+                employeelist[emptyIndex].sector = sectorAuxInt;
+                employeelist[emptyIndex].salary = salarioAuxFloat;
+                employeelist[emptyIndex].isEmpty = FALSE;
+            }
          }
     }
 return retorno;
@@ -102,6 +127,7 @@ int getFirstEmptyIndex(eEmployee* employeelist, int len,int* emptyIndex)
 }
 
 int emp_SetId(eEmployee* empleado,int id,int index)//el primer id va a ser 0 y cada nuevo entry va a tener un id diferente.
+//si falla en encontrar un id retorna -1;
 {
 
     int retorno =-1;
