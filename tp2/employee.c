@@ -1,19 +1,10 @@
-#include "employee.h"
-#include "unt_ingresoDeDatos.h"
 #include <stdio.h>
 #include <string.h>
+#include "employee.h"
+#include "unt_ingresoDeDatos.h"
 
-#define TRUE 1
-#define FALSE 0
 
-/** \brief To indicate that all position in the array are empty,
-* this function put the flag (isEmpty) in TRUE in all
-* position of the array
-* \param list Employee* Pointer to array of employees
-* \param len int Array length
-* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
-*
-*/
+
 int emp_initEmployees(eEmployee* employeelist, int len)
 {
     if(employeelist!=NULL&&len>0)
@@ -30,24 +21,7 @@ return -1;
 }
 
 
-/*2.2 Función addEmployees
-Agrega en un array de empleados existente los valores recibidos como parámetro en la primer
-posición libre.*/
 
-/*sin el uso de punteros esta funcion es imposible, ya que no puedo usarla solo para asignar los valores
-cual creo que seria su funcion ideal. por lo tanto tengo que hacer toda la logica adentro de la misma.
-*/
-/** \brief add in a existing list of employees the values received as parameters
-* in the first empty position
-* \param list employee*
-* \param len int
-* \return int Return (-1) if Error [Invalid length or NULL pointer or without
-free space] - (0) if Ok
-*
-UTN FRA – Tecnicatura Superior en Programación. http://www.sistemas-utnfra.com.ar 4
-Programación I – Laboratorio I
-
-*/
 int emp_addEmployee(eEmployee employeelist[], int len)
 {
     int retorno=-1;
@@ -56,8 +30,9 @@ int emp_addEmployee(eEmployee employeelist[], int len)
         float salarioAuxFloat;
         int sectorAuxInt;
         int emptyIndex;
-        char nombreAux[51],apellidoAux[51],validacionAux;
-        int reintentos=3;
+        char nombreAux[51];
+        char apellidoAux[51];
+        char validacionAux;
         if(getFirstEmptyIndex(employeelist,len,&emptyIndex)==0)//este if verifica si hay espacio
         {
             printf("\n Error! No hay mas lugares libres\n");
@@ -67,41 +42,47 @@ int emp_addEmployee(eEmployee employeelist[], int len)
         {
             //se ingresan los datos;
 
-            do{
+            do{// aca algo estoy haciendo mal, aveces los datos validan, pero a veces deciden no valida nada .
 
             if(emp_SetId(employeelist,-1,emptyIndex) == -1)
             {
                 break;
             }
+
             if(getValidNames("ingrese el nombre = ","\nError! intente nuevamente",
-                          "\nError! the name must not exceed 51 characters ",&nombreAux,51,reintentos) == -1)
+                          "\nError! el nombre no debe superar los 51 caracteres. ",nombreAux,51,3) == -1)
             {
                 break;
             }
-             if(getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
-                          "\nError!last name must not exceed 51 characters ",&apellidoAux,51,reintentos) == -1)
+
+              if(getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
+                         "\nError!el apellido no debe superar los 51 caracteres. ",apellidoAux,51,3) == -1)
             {
                 break;
             }
-            if(getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,reintentos) == -1)
+
+
+             if(getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,3) == -1)
             {
                 break;
             }
-             if(getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,reintentos) == -1)
+
+             if(getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,3) == -1)
             {
                 break;
             }
 
             validacionAux = getChar("confirmar ingreso de datos 'Y', 'N'");
-            }while(validacionAux != 'Y' && validacionAux != 'y');
+            }while(validacionAux != 'Y' && validacionAux != 'y' && validacionAux != 'n' && validacionAux != 'N');
 
-            if(validacionAux == 'Y' && validacionAux == 'y')
+            if(validacionAux == 'Y' || validacionAux == 'y')
             {
                 strcpy(employeelist[emptyIndex].lastName , apellidoAux);
                 strcpy(employeelist[emptyIndex].name , nombreAux);
                 employeelist[emptyIndex].sector = sectorAuxInt;
                 employeelist[emptyIndex].salary = salarioAuxFloat;
                 employeelist[emptyIndex].isEmpty = FALSE;
+                retorno=0;
             }
          }
     }
@@ -110,6 +91,7 @@ return retorno;
 
 int getFirstEmptyIndex(eEmployee* employeelist, int len,int* emptyIndex)
 {
+
     if(employeelist != NULL&&len > 0 &&emptyIndex!=NULL )
     {
         int i;
@@ -145,22 +127,14 @@ int emp_SetId(eEmployee* empleado,int id,int index)//el primer id va a ser 0 y c
     return retorno;
 }
 
-//2.6 Función printEmployees
-//Imprime el array de empleados de forma encolumnada.
-/** \brief print the content of employees array
-*
-* \param list Employee*
-* \param length int
-* \return int
-*
-*/
+
 int printEmployees(eEmployee* list, int len)
 {
     if(list!=NULL&&len>0)
     {
         int i;
         system("cls");
-        printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","name","lastname","salary","sector");
+        printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","nombre","apellido","salario","sector");
         for(i=0; i<len && list[i].isEmpty==FALSE;i++)
         {
             printf("\n%5d | %20s | %20s | %10.2f | %10d",list[i].id ,list[i].name , list[i].lastName ,list[i].salary,list[i].sector);
@@ -171,17 +145,7 @@ int printEmployees(eEmployee* list, int len)
 return 0;
 }
 
-//2.3 Función findEmployeeById
-//Busca un empleado recibiendo como parámetro de búsqueda su Id.
-/** \brief find an Employee by Id en returns the index position in array.
-*
-* \param list Employee*
-* \param len int
-* \param id int
-* \return Return employee index position or (-1) if [Invalid length or NULL
-pointer received or employee not found]
-*
-*/
+
 int findEmployeeById(eEmployee* list, int len,int id)
 {
     int i;
@@ -199,31 +163,104 @@ int findEmployeeById(eEmployee* list, int len,int id)
 
 return returnIndex;
 }
-/**
-*2.4 Función removeEmployee
-*\brief Remove a Employee by Id (put isEmpty Flag in 1)
-*
-* \param list Employee*
-* \param len int
-* \param id int
-* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
-find a employee] - (0) if Ok
-*
-*/
+
+
 int removeEmployee(eEmployee* list, int len, int id)
 {
 int retorno=-1;
-int index;
-
-index = findEmployeeById(list,len,id);
-
     if(list!=NULL && len>0 && id > 0 && id < 1000)
     {
 
+        int index;
+        index = findEmployeeById(list,len,id);
+
+        if(index!=-1)
+        {
+            printf("el empleado a borrar es : \n");
+             printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","nombre","apellido","salario","sector");
+            printf("\n%5d | %20s | %20s | %10.2f | %10d\n",list[index].id ,list[index].name , list[index].lastName ,list[index].salary,list[index].sector);
+
+
+            if(getChar("para confirmar el borrado ingrese 'S' ") == 'S' )
+            {
+                list[index].isEmpty=TRUE;
+                retorno=0;
+            }
+        }else
+        {
+            printf("este indice ya esta vacio \n");
+        }
+    }
+return retorno;
+}
+
+int modificarEmployee(eEmployee list[], int len, int id)
+{
+int retorno=-1;
+int sectorAuxInt;
+float salarioAuxFloat;
+    if(list!=NULL && len>0 && id > 0 && id < 1000)
+    {
+
+        char opcionesModificacion[][70]={"1- nombre","2- apellido","3- salario","4- sector","5- salir","N"};
+        int index;
+        index = findEmployeeById(list,len,id);
+
+        if(index!=-1)
+        {
+            printf("el empleado a modificar es : \n");
+             printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","nombre","apellido","salario","sector");
+            printf("\n%5d | %20s | %20s | %10.2f | %10d\n",list[index].id ,list[index].name , list[index].lastName ,list[index].salary,list[index].sector);
+
+
+            if(getChar("¿Desea modificar este empleado? 'Y', 'N'") == 'Y' )
+            {
+                int opcionSeleccionada;
+                do{
+                    clearScreen();
+                    menuDisplay(opcionesModificacion);
+
+                    if(getValidInt("\nelija una opcion [_]\b\b","\nerror opcion invalida",&opcionSeleccionada,1,5,3)!=-1)
+                    {
+                          switch(opcionSeleccionada)
+                          {
+                            case 1://"1- nombre"
+                                 getValidNames("ingrese el nombre = ","\nError! intente nuevamente",
+                                    "\nError! el nombre no debe superar los 51 caracteres. ",list[index].name,51,3);
+                                break;
+
+                            case 2://"2- apellido"
+                                getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
+                                    "\nError!el apellido no debe superar los 51 caracteres. ",list[index].lastName,51,3);
+                                break;
+
+                            case 3://"3- salario"
+                                getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,3);
+                                list[index].salary = salarioAuxFloat;
+                                break;
+
+                            case 4://"4- sector"
+                                getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,3);
+                                list[index].sector = sectorAuxInt;
+                                break;
+                         }//end swich
+                    }//if(getValidInt);
+                }while(opcionSeleccionada!=5);
 
 
 
-       list[index].isEmpty=TRUE;
+
+
+
+
+
+
+
+            }
+        }else
+        {
+            printf("No se encontro el empleado \n");
+        }
     }
 return retorno;
 }

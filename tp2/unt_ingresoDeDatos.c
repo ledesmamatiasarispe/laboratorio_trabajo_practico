@@ -204,7 +204,7 @@ void getString(char mensaje[],char input[])
 
     printf("%s",mensaje);
     clearStdin();
-    scanf ("%[^\n]s", input);
+    scanf("%[^\n]s" , input);
 }
 
 /**
@@ -467,23 +467,23 @@ void clearScreen(void)
  */
 int esUnNombre(char str[])
 {
-   int i=0;
+   int iString = 0 ;
 
-   while(str[i] != '\0')
+   while(str[iString] != '\0')
    {
-        if(i==0 &&   str[i]==' ')
+        if(iString==0 &&   str[iString]==' ')
                {
                    return 0;
 
                }
 
-        if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+        if((str[iString] != ' ') && (str[iString] < 'a' || str[iString] > 'z') && (str[iString] < 'A' || str[iString] > 'Z'))
             {
               return 0;
             }
 
 
-       i++;
+       iString++;
    }
 
    return 1;

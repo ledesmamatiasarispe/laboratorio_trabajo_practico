@@ -13,7 +13,6 @@ char opciones[][70]={"1- ALTAS","2- MODIFICAR","3- BAJA","4- INFORMAR","5- salir
 
 int main()
 {
-    clearStdin();
     int aux;
     eEmployee employeeList[lenght];
     emp_initEmployees(employeeList,lenght);
@@ -28,13 +27,20 @@ int main()
             {
                 case 1://"1- ALTAS"
                 emp_addEmployee(employeeList,lenght);
+                //funciona mal, solo la funcion getalgo que esta primera valida y las otras no validan nada
+
                     break;
                 case 2://"2- MODIFICAR"
+                    getValidInt("ingrese id del empleado a modificar","error ingrese nuevamente",&aux,0,1001,3);
+                    modificarEmployee(employeeList,lenght,aux);
+                      pausarYBorrar();
                     break;
                 case 3://"3- BAJA"
-                getValidInt("ingrese id del empleado a borrar","error ingrese nuevamente",&aux,0,1001,3);
-                removeEmployee(employeeList,lenght,aux);
+                    getValidInt("ingrese id del empleado a borrar","error ingrese nuevamente",&aux,0,1001,3);
+                    removeEmployee(employeeList,lenght,aux);
+                    pausarYBorrar();
                     break;
+
                 case 4://"4- INFORMAR"
 
                     printEmployees(employeeList,lenght);
@@ -45,6 +51,6 @@ int main()
         }while(opcionSeleccionada!=5);
 
 
-    printf("viva peronia!\n");
+    printf("adios!\n");
     return 0;
 }
