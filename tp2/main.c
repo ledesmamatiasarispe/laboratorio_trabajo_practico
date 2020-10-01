@@ -5,7 +5,7 @@
 #include "control.h"
 #define TRUE 1
 #define FALSE 0
-#define lenght 30//len of the eEmployee list aray
+#define lenght 150//len of the eEmployee list aray
 
 
 char opciones[][70]={"1- ALTAS","2- MODIFICAR","3- BAJA","4- INFORMAR","5- salir","N"};
@@ -16,6 +16,7 @@ int main()
     int aux;
     eEmployee employeeList[lenght];
     emp_initEmployees(employeeList,lenght);
+    hardcodearEmpleados(employeeList,lenght);
     int opcionSeleccionada;
     do{
        clearScreen();
@@ -42,7 +43,9 @@ int main()
                     break;
 
                 case 4://"4- INFORMAR"
-
+                    printEmployees(employeeList,lenght);
+                    pausarYBorrar();
+                    emp_ordenarPorNombreYApellido(employeeList,lenght);
                     printEmployees(employeeList,lenght);
                     pausarYBorrar();
                     break;

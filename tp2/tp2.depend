@@ -37,29 +37,29 @@
 
 1601237518 c:\users\arisp\desktop\tpi\trabajo_practico_2\tp2\unt_ingresodedatos.h
 
-1601157879 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\control.c
+1601523686 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\control.c
 	"control.h"
 
-1601138292 c:\users\arisp\desktop\trabajo_practico_1\tp2\control.h
+1601523686 c:\users\arisp\desktop\trabajo_practico_1\tp2\control.h
 
-1601348660 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.c
+1601523407 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.c
 	<stdio.h>
 	<string.h>
 	"employee.h"
 	"unt_ingresoDeDatos.h"
 
-1601348521 c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.h
+1601406888 c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.h
 
-1601237518 c:\users\arisp\desktop\trabajo_practico_1\tp2\unt_ingresodedatos.h
+1601523671 c:\users\arisp\desktop\trabajo_practico_1\tp2\unt_ingresodedatos.h
 
-1601344542 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\main.c
+1601522654 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\main.c
 	"unt_ingresoDeDatos.h"
 	<stdio.h>
 	<stdlib.h>
 	"employee.h"
 	"control.h"
 
-1601335785 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\unt_ingresodedatos.c
+1601523321 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\unt_ingresodedatos.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>

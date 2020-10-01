@@ -57,11 +57,21 @@ char getChar(char* mensaje)
  * \return retorna el número aleatorio generado
  *
  */
-char getNumeroAleatorio(int desde , int hasta, int iniciar)
+int getNumeroAleatorio(int desde , int hasta, int iniciar)
 {
+    int RandomNumber;
     if(iniciar)
-        srand (time(NULL));
-    return desde + (rand() % (hasta + 1 - desde)) ;
+    {
+       srand (time(NULL));
+    }
+
+
+         RandomNumber = rand()%(hasta+1-desde) + desde ;
+
+    return RandomNumber;
+
+
+
 }
 
 
@@ -204,7 +214,8 @@ void getString(char mensaje[],char input[])
 
     printf("%s",mensaje);
     clearStdin();
-    scanf("%[^\n]s" , input);
+
+   scanf("%s" , input);
 }
 
 /**
@@ -471,12 +482,6 @@ int esUnNombre(char str[])
 
    while(str[iString] != '\0')
    {
-        if(iString==0 &&   str[iString]==' ')
-               {
-                   return 0;
-
-               }
-
         if((str[iString] != ' ') && (str[iString] < 'a' || str[iString] > 'z') && (str[iString] < 'A' || str[iString] > 'Z'))
             {
               return 0;

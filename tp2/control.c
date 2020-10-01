@@ -1,5 +1,4 @@
 #include "control.h"
-
 #define MostrarOpcionesExtraSI 'S'
 #define MostrarOpcionesExtraNO 'N'
 
@@ -18,7 +17,6 @@ void pausarYBorrar(void)
     system("pause");
     system("cls");
 }
-
 
 
 
