@@ -8,8 +8,8 @@ int main()
 {
     int aux;
     eEmployee employeeList[lenght];
-    //emp_initEmployees(employeeList,lenght);
-    hardcodearEmpleados(employeeList,lenght);
+    emp_initEmployees(employeeList,lenght);
+    //hardcodearEmpleados(employeeList,lenght);
     int opcionSeleccionada;
     int condicionDeOrdenamiento;
     do{
@@ -20,7 +20,7 @@ int main()
               switch(opcionSeleccionada)
             {
                 case 1://"1- ALTAS"
-                emp_addEmployee(employeeList,lenght);
+                    emp_addEmployee(employeeList,lenght);
                     break;
                 case 2://"2- MODIFICAR"
                     getValidInt("ingrese id del empleado a modificar","error ingrese nuevamente",&aux,0,1001,3);

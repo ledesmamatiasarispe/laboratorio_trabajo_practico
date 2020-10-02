@@ -42,17 +42,17 @@
 
 1601559177 c:\users\arisp\desktop\trabajo_practico_1\tp2\control.h
 
-1601599769 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.c
+1601611676 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.c
 	<stdio.h>
 	<string.h>
 	"employee.h"
 	"utn.h"
 
-1601599699 c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.h
+1601611691 c:\users\arisp\desktop\trabajo_practico_1\tp2\employee.h
 
 1601523671 c:\users\arisp\desktop\trabajo_practico_1\tp2\unt_ingresodedatos.h
 
-1601604405 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\main.c
+1601609432 source:c:\users\arisp\desktop\trabajo_practico_1\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"employee.h"

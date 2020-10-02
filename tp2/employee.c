@@ -69,8 +69,7 @@ int emp_addEmployee(eEmployee employeelist[], int len)
         {
             //se ingresan los datos;
 
-            do{// aca algo estoy haciendo mal, aveces los datos validan, pero a veces deciden no valida nada .
-                    //ahora si, pero hay algo que hace que las funciones no validan si permito que tome el string un " ",solo valida la primera funion getValidAlgo y las uqe siguen se rompen
+            do{
 
             if(emp_SetId(employeelist,-1,emptyIndex) == -1)
             {
@@ -261,7 +260,11 @@ indicate UP or DOWN order
  * \param len int
  * \param order int [1] indicate UP - [0] indicate DOWN
  * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
- *///por alguna razon el indice 0 no lo mueve y queda siempre arriba de todo en la lista
+ */
+ //tengo un error que el primer indice 0 quedaba siempre en el mismo lugar.
+ //era un error en la funcion intercamiarLugares, habia puesto el if que verifica que los parametros
+ //esten correctos int parametroA == NULL; por lo que cuando el valor era 0 no validava el intercambio
+ // por lo tanto cuando el indice de uno de las estructuras era 0 no intercambiaba.
 
 
 int sortEmployees(eEmployee lista[], int len, int order)
@@ -289,15 +292,15 @@ int sortEmployees(eEmployee lista[], int len, int order)
                         retorno=1;
                     }
                 }
-                    if(order == 0)
+                if(order == 0)
+                {
+                    if(comparacionSector<0 || (comparacionApellido < 0 && comparacionSector ==0) )
                     {
-                        if(comparacionSector<0 || (comparacionApellido < 0 && comparacionSector ==0) )
-                        {
-                            intercambiarLugaesEempleados(lista,jEmpleados,iEmpleados);
-                            retorno=1;
-                        }
+                        intercambiarLugaesEempleados(lista,jEmpleados,iEmpleados);
+                        retorno=1;
                     }
                 }
+            }
         }
     }
      return retorno;
@@ -423,15 +426,15 @@ return retorno;
  *///por alguna razon el indice 0 no lo mueve y queda siempre arriba de todo en la lista
  void intercambiarLugaesEempleados(eEmployee* lista,int empleadoA,int empleadoB )
  {
-     if(empleadoA!= NULL && empleadoB != NULL)
-     {
+        if(lista!=NULL && empleadoA>=0 && empleadoB>=0)
+        {
         eEmployee aux;
 
         aux=lista[empleadoA];
         lista[empleadoA]=lista[empleadoB];
         lista[empleadoB]=aux;
 
-     }
+        }
  }
 
 
@@ -461,7 +464,7 @@ char apellidos[500][51]={"Acosta","Acunia","Aguilar","Aguirre","Agustin","Ahumad
         emp_SetId(lista,-1,iEmpleados);
 
         numeroRandomName = getNumeroAleatorio(0,400,flagSeddRandom);
-        numeroRandomLastName = getNumeroAleatorio(0,400,flagSeddRandom);
+        numeroRandomLastName = getNumeroAleatorio(0,1,flagSeddRandom);
 
         strcpy(lista[iEmpleados].name , nombres[numeroRandomName]);
 
