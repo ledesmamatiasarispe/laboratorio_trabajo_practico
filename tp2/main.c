@@ -8,7 +8,7 @@ int main()
 {
     int aux;
     eEmployee employeeList[lenght];
-    emp_initEmployees(employeeList,lenght);
+    //emp_initEmployees(employeeList,lenght);
     hardcodearEmpleados(employeeList,lenght);
     int opcionSeleccionada;
     int condicionDeOrdenamiento;

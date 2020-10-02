@@ -288,8 +288,7 @@ int sortEmployees(eEmployee lista[], int len, int order)
                         intercambiarLugaesEempleados(lista,iEmpleados,jEmpleados);
                         retorno=1;
                     }
-                }else
-                {
+                }
                     if(order == 0)
                     {
                         if(comparacionSector<0 || (comparacionApellido < 0 && comparacionSector ==0) )
@@ -299,7 +298,6 @@ int sortEmployees(eEmployee lista[], int len, int order)
                         }
                     }
                 }
-             }
         }
     }
      return retorno;
