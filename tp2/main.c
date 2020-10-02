@@ -1,15 +1,8 @@
-#include "unt_ingresoDeDatos.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "employee.h"
 #include "control.h"
-#define TRUE 1
-#define FALSE 0
-#define lenght 150//len of the eEmployee list aray
-
-
-char opciones[][70]={"1- ALTAS","2- MODIFICAR","3- BAJA","4- INFORMAR","5- salir","N"};
-
 
 int main()
 {
@@ -18,18 +11,16 @@ int main()
     emp_initEmployees(employeeList,lenght);
     hardcodearEmpleados(employeeList,lenght);
     int opcionSeleccionada;
+    int condicionDeOrdenamiento;
     do{
        clearScreen();
-        menuDisplay(opciones);
-
+        menuDisplay();
         if(getValidInt("\nelija una opcion [_]\b\b","\nerror opcion invalida",&opcionSeleccionada,1,5,3)!=-1)
         {
               switch(opcionSeleccionada)
             {
                 case 1://"1- ALTAS"
                 emp_addEmployee(employeeList,lenght);
-                //funciona mal, solo la funcion getalgo que esta primera valida y las otras no validan nada
-
                     break;
                 case 2://"2- MODIFICAR"
                     getValidInt("ingrese id del empleado a modificar","error ingrese nuevamente",&aux,0,1001,3);
@@ -43,10 +34,14 @@ int main()
                     break;
 
                 case 4://"4- INFORMAR"
+
+                    getValidInt("ingrese '1' para = 1-10,a-z \0 '0' para = 10-1,z-a ","error, valor invalido o fuera de rango",
+                                &condicionDeOrdenamiento,0,1,3);
+
+                    sortEmployees(employeeList,lenght,condicionDeOrdenamiento);
                     printEmployees(employeeList,lenght);
-                    pausarYBorrar();
-                    emp_ordenarPorNombreYApellido(employeeList,lenght);
-                    printEmployees(employeeList,lenght);
+                    promedioSueldos(employeeList,lenght);
+
                     pausarYBorrar();
                     break;
             }

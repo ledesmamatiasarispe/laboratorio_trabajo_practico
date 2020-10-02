@@ -1,10 +1,11 @@
 #include "control.h"
-#define MostrarOpcionesExtraSI 'S'
-#define MostrarOpcionesExtraNO 'N'
 
 
-void menuDisplay(char lista[][70]){
-    for(int i=0;lista[i][0]!= MostrarOpcionesExtraNO ; i++)
+void menuDisplay(void){
+
+    char lista[5][70]={"1- ALTAS","2- MODIFICAR","3- BAJA","4- INFORMAR","5- salir"};
+
+    for(int i=0; i<5 ; i++)
     {
         printf("\n %-70s", lista[i]);
     }

@@ -1,7 +1,7 @@
 #ifndef CONTROL_H_INCLUDED
 #define CONTROL_H_INCLUDED
 
-void menuDisplay(char lista[][70]);
+void menuDisplay(void);
 void pausarYBorrar();
 
 

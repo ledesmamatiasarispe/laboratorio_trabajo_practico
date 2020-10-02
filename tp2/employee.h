@@ -1,6 +1,10 @@
 #ifndef EMPLOYEE_H_INCLUDED
 #define EMPLOYEE_H_INCLUDED
 
+#define TRUE 1
+#define FALSE 0
+#define lenght 5//len of the eEmployee list aray
+
 
 
 #define TRUE 1
@@ -102,7 +106,8 @@ int emp_SetId(eEmployee* empleado,int id,int index);
 
 int modificarEmployee(eEmployee list[], int len, int id);
 
-
+int sortEmployees(eEmployee list[], int len, int order);
+int promedioSueldos(eEmployee lista[],int len);
 #endif // EMPLOYEE_H_INCLUDED
 
 

@@ -31,9 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="450_nombres_y_apellidos.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="control.c">
 			<Option compilerVar="CC" />
 		</Unit>
