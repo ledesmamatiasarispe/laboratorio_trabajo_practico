@@ -1,11 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include "employee.h"
-#include "unt_ingresoDeDatos.h"
+#include "utn.h"
 
 
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
+/** \brief To indicate that all position in the array are empty,
+* this function put the flag (isEmpty) in TRUE in all
+* position of the array
+* \param list Employee* Pointer to array of employees
+* \param len int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
 int emp_initEmployees(eEmployee* employeelist, int len)
 {
     if(employeelist!=NULL&&len>0)
@@ -24,6 +32,24 @@ return -1;
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
 
+/*2.2 Función addEmployees
+Agrega en un array de empleados existente los valores recibidos como parámetro en la primer
+posición libre.*/
+
+/*sin el uso de punteros esta funcion es imposible, ya que no puedo usarla solo para asignar los valores
+cual creo que seria su funcion ideal. por lo tanto tengo que hacer toda la logica adentro de la misma.
+*/
+/** \brief add in a existing list of employees the values received as parameters
+* in the first empty position
+* \param list employee[] it's the array of the eEmplyee structure
+* \param len int the lenght of the eEmployee Array
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without
+free space] - (0) if Ok
+*
+UTN FRA – Tecnicatura Superior en Programación. http://www.sistemas-utnfra.com.ar 4
+Programación I – Laboratorio I
+
+*/
 int emp_addEmployee(eEmployee employeelist[], int len)
 {
     int retorno=-1;
@@ -86,6 +112,14 @@ return retorno;
 }
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
+
+/** \brief searches for a isEmpty with a true value and returns its index number
+* \param list employee[] it's the array of the eEmplyee structure
+* \param len int the lenght of the eEmployee Array
+* \param *emptyIndex its the pointer to where the empty index value will be stored
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without
+free space] - (0) if Ok
+*/
 int getFirstEmptyIndex(eEmployee* employeelist, int len,int* emptyIndex)
 {
 
@@ -106,12 +140,19 @@ int getFirstEmptyIndex(eEmployee* employeelist, int len,int* emptyIndex)
 }
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
-int emp_SetId(eEmployee* empleado,int id,int index)//el primer id va a ser 0 y cada nuevo entry va a tener un id diferente.
-//si falla en encontrar un id retorna -1;
-{
 
+/** \brief genera automaticamente un id nuevo para cada empleado
+ *
+ * \param empleado eEmployee* es el array de estructura eEmployee
+ * \param id int es la id con la que se quiere inciarlizar el conteo. si se pone -1 empieza a contar desde 1 hasta el limite de int
+ * \param index int es el indice de el array de empleados donde se va aguardar el id
+ * \return int si falla en encontrar un id retorna -1, si sale todo bien retorna 0
+ *
+ */
+int emp_SetId(eEmployee* empleado,int id,int index)
+{
     int retorno =-1;
-    static int maxId=0;
+    static unsigned int  maxId=0;
     if(empleado != NULL)
     {
         retorno = 0;
@@ -120,6 +161,14 @@ int emp_SetId(eEmployee* empleado,int id,int index)//el primer id va a ser 0 y c
             maxId++;
             empleado[index].id = maxId;
         }
+    }else
+    {
+        if(id>maxId)
+        {
+          retorno = 0;
+          maxId=id;
+          empleado[index].id = maxId;
+        }
     }
 
     return retorno;
@@ -127,27 +176,17 @@ int emp_SetId(eEmployee* empleado,int id,int index)//el primer id va a ser 0 y c
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
 
-int printEmployees(eEmployee* list, int len)
-{
-    if(list!=NULL&&len>0)
-    {
-        int i;
-        system("cls");
-        printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","nombre","apellido","salario","sector");
-        for(i=0; i<len;i++)
-        {
-            if(list[i].isEmpty==FALSE)
-           // printf("\n%5d | %20s | %20s | %10.2f | %10d | %d | %d",list[i].id ,list[i].name , list[i].lastName ,list[i].salary,list[i].sector,list[i].isEmpty,i);
-            printf("\n%5d | %20s | %20s | %10.2f | %10d ",list[i].id ,list[i].name , list[i].lastName ,list[i].salary,list[i].sector);
-        }
-        return 1;
-    }
-
-return 0;
-}
-//***************************************************************************************************************************************
-//***************************************************************************************************************************************
-
+//2.3 Función findEmployeeById
+//Busca un empleado recibiendo como parámetro de búsqueda su Id.
+/** \brief find an Employee by Id en returns the index position in array.
+*
+* \param list Employee*
+* \param len int
+* \param id int
+* \return Return employee index position or (-1) if [Invalid length or NULL
+pointer received or employee not found]
+*
+*/
 int findEmployeeById(eEmployee* list, int len,int id)
 {
     int i;
@@ -168,6 +207,18 @@ return returnIndex;
 
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
+
+/**
+*2.4 Función removeEmployee
+*\brief Remove a Employee by Id (put isEmpty Flag in 1)
+*
+* \param list Employee*
+* \param len int
+* \param id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+find a employee] - (0) if Ok
+*
+*/
 int removeEmployee(eEmployee* list, int len, int id)
 {
 int retorno=-1;
@@ -196,9 +247,106 @@ int retorno=-1;
     }
 return retorno;
 }
+
+/************************************************************************************************************************
+************************************************************************************************************************/
+
+/**
+2.5 Función sortEmployees
+Ordena el array de empleados por apellido y sector de manera ascendente o descendente.
+\brief Sort the elements in the array of employees, the argument order
+indicate UP or DOWN order
+ *
+ * \param list Employee*
+ * \param len int
+ * \param order int [1] indicate UP - [0] indicate DOWN
+ * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+ *///por alguna razon el indice 0 no lo mueve y queda siempre arriba de todo en la lista
+
+
+int sortEmployees(eEmployee lista[], int len, int order)
+{
+    int retorno = -1;
+    if(lista != NULL && len > 0 && (order == 0 || order == 1) )
+    {
+        retorno = 0;
+        int iEmpleados;
+        int jEmpleados;
+        int comparacionSector;
+        int comparacionApellido;
+
+        for(iEmpleados = 0 ; iEmpleados < len-1 ; iEmpleados++ )
+        {
+           for(jEmpleados = iEmpleados+1 ; jEmpleados<len ; jEmpleados++ )
+            {
+                comparacionApellido = strcmp(lista[iEmpleados].lastName,lista[jEmpleados].lastName);
+                comparacionSector = lista[iEmpleados].sector - lista[jEmpleados].sector;
+                if(order == 1)
+                {
+                    if(comparacionSector>0 || (comparacionApellido > 0 && comparacionSector ==0) )
+                    {
+                        intercambiarLugaesEempleados(lista,iEmpleados,jEmpleados);
+                        retorno=1;
+                    }
+                }else
+                {
+                    if(order == 0)
+                    {
+                        if(comparacionSector<0 || (comparacionApellido < 0 && comparacionSector ==0) )
+                        {
+                            intercambiarLugaesEempleados(lista,jEmpleados,iEmpleados);
+                            retorno=1;
+                        }
+                    }
+                }
+             }
+        }
+    }
+     return retorno;
+}
+
 //***************************************************************************************************************************************
 //***************************************************************************************************************************************
 
+//2.6 Función printEmployees
+//Imprime el array de empleados de forma encolumnada.
+/** \brief print the content of employees array
+*
+* \param list Employee* the pointer to the eEmployee array that will be printed in console
+* \param length int lenght of the array
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int printEmployees(eEmployee* list, int len)
+{
+    if(list!=NULL&&len>0)
+    {
+        int i;
+        clearScreen();
+        printf("\n%5s | %-20s | %-20s | %-10s | %-10s","ID","nombre","apellido","salario","sector");
+        for(i=0; i<len;i++)
+        {
+            if(list[i].isEmpty==FALSE)
+           // printf("\n%5d | %20s | %20s | %10.2f | %10d | %d | %d",list[i].id ,list[i].name , list[i].lastName ,list[i].salary,list[i].sector,list[i].isEmpty,i);
+            printf("\n%5d | %20s | %20s | %10.2f | %10d ",list[i].id ,list[i].name , list[i].lastName ,list[i].salary,list[i].sector);
+        }
+        return 1;
+    }
+
+return 0;
+}
+//***************************************************************************************************************************************
+//***************************************************************************************************************************************
+
+/** \brief ingresandole un id de un empleado, busca en que indice se encuetra ese id .
+ muestra los datos del empleado y permite modificar los datos uno a uno
+ *
+ * \param list[] eEmployee es el array de estructura eEmployee a modificar
+ * \param len int el largo del array
+ * \param id int es el id del empleado a modificar
+ * \return int retorna -1 si algun parametro esta incorrecto - 0 si no existe el empleado con el id ingresado y 1 si se entro a alguna modificacion;
+ *
+ */
 int modificarEmployee(eEmployee list[], int len, int id)
 {
 int retorno=-1;
@@ -232,28 +380,34 @@ float salarioAuxFloat;
                             case 1://"1- nombre"
                                  getValidNames("ingrese el nombre = ","\nError! intente nuevamente",
                                     "\nError! el nombre no debe superar los 51 caracteres. ",list[index].name,51,3);
+                                retorno=1;
                                 break;
 
                             case 2://"2- apellido"
                                 getValidNames("ingrese el apellido = ","\nError!  intente nuevamente",
                                     "\nError!el apellido no debe superar los 51 caracteres. ",list[index].lastName,51,3);
+                                retorno=1;
                                 break;
 
                             case 3://"3- salario"
                                 getValidFloat("ingrese el salario","error intente nuevamente",&salarioAuxFloat,3);
                                 list[index].salary = salarioAuxFloat;
+                                retorno=1;
                                 break;
 
                             case 4://"4- sector"
                                 getValidInt("ingrese el sector = ","\nError! intente nuevamente",&sectorAuxInt,0,10,3);
                                 list[index].sector = sectorAuxInt;
+                                retorno=1;
                                 break;
                          }//end swich
                     }//if(getValidInt);
+
                 }while(opcionSeleccionada!=5);
             }//endif(desea modificar el empleado?)
         }else
         {
+            retorno=0;
             printf("No se encontro el empleado \n");
         }
     }//end if de verificacion de parametros de la func
@@ -262,7 +416,13 @@ return retorno;
 
 /************************************************************************************************************************
 ************************************************************************************************************************/
-
+/**
+\brief intercambia dos elementos de un array de estructura eEmpleado
+ *
+ * \param list Employee*
+ * \param empleadoA
+ * \param empleadoB
+ *///por alguna razon el indice 0 no lo mueve y queda siempre arriba de todo en la lista
  void intercambiarLugaesEempleados(eEmployee* lista,int empleadoA,int empleadoB )
  {
      if(empleadoA!= NULL && empleadoB != NULL)
@@ -280,63 +440,13 @@ return retorno;
 /************************************************************************************************************************
 ************************************************************************************************************************/
 
-/**
-2.5 Función sortEmployees
-Ordena el array de empleados por apellido y sector de manera ascendente o descendente.
-\brief Sort the elements in the array of employees, the argument order
-indicate UP or DOWN order
+/** \brief carga nombres al array y genera valores automaticos para cada miembro de una estrucutura
  *
- * \param list Employee*
- * \param len int
- * \param order int [1] indicate UP - [0] indicate DOWN
- * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
- *///por alguna razon el indice 0 no lo mueve y queda siempre arriba de todo en la lista
-
-int sortEmployees(eEmployee lista[], int len, int order)
-{
-    int retorno = -1;
-    if(lista != NULL && len > 0 && (order == 0 || order == 1) )
-    {
-        retorno = 0;
-        int iEmpleados;
-        int jEmpleados;
-        int comparacionSector;
-        int comparacionApellido;
-
-        for(iEmpleados = 0 ; iEmpleados < len-1 ; iEmpleados++ )
-        {
-           for(jEmpleados = iEmpleados+1 ; jEmpleados<len ; jEmpleados++ )
-            {
-                comparacionApellido = strcmp(lista[iEmpleados].lastName,lista[jEmpleados].lastName);
-                comparacionSector = lista[iEmpleados].sector - lista[jEmpleados].sector;
-                    if(order == 1)
-                    {
-                        if(comparacionSector>0 || comparacionApellido > 0 && comparacionSector ==0 )
-                        {
-                            intercambiarLugaesEempleados(lista,iEmpleados,jEmpleados);
-                            retorno=1;
-                        }
-                    }else
-                    {
-                        if(order == 0)
-                        {
-                            if(comparacionSector<0 || comparacionApellido < 0 && comparacionSector ==0 )
-                            {
-                                intercambiarLugaesEempleados(lista,jEmpleados,iEmpleados);
-                                 retorno=1;
-                            }
-                        }
-                    }
-             }
-        }
-
-    }
-     return retorno;
-}
-
-/************************************************************************************************************************
-************************************************************************************************************************/
-
+ * \param lista[] eEmployee es el array de estructura eEmployee a modificar
+ * \param len int el largo del array
+ * \return void
+ *
+ */
 void hardcodearEmpleados(eEmployee lista[],int len)
 {
 
@@ -373,22 +483,28 @@ char apellidos[500][51]={"Acosta","Acunia","Aguilar","Aguirre","Agustin","Ahumad
 /************************************************************************************************************************
 ************************************************************************************************************************/
 
+/** \brief calcula y muestra la suma del total de los sueldos, el promedio de los sueldos y la cantidad de empleados por sobre el promedio
+ *
+ * \param lista[] eEmployee es el array de estructura eEmployee a modificar
+ * \param len int el largo del array
+ * \return int retorna -1 si los parametros de la funcion estan incorrectos - 0 esta todo bien
+ *
+ */
 int promedioSueldos(eEmployee lista[],int len)
 {
     int retorno = -1;
 
     if(lista != NULL && len>0)
     {
+        retorno = 0;
         float acumuladorSueldos=0,contadorEmpleados=0;
         float promedio;
         int CantidadSobreElPromedio=0;
-        int retorno = 0;
         int iEmpleados;
         for(iEmpleados=0;iEmpleados<len;iEmpleados++)
         {
             if(lista[iEmpleados].isEmpty==FALSE)
             {
-                retorno=1;
                 acumuladorSueldos += lista[iEmpleados].salary;
                 contadorEmpleados++;
             }

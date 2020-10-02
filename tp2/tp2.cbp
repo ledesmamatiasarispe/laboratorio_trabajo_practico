@@ -46,12 +46,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="unt_ingresoDeDatos.c">
+		<Unit filename="utn.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="unt_ingresoDeDatos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="utn.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
