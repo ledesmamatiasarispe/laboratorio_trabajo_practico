@@ -19,8 +19,26 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
+    //1- validar parametros DE LA FUNCION
+    int retorno = -1;
+    if(pArrayListEmployee!=NULL)
+    {
+        retorno = 0; //validaron los parametros
 
-    return 1;
+            //2- ingresar los datos para el empleado en un aux
+        // si todo esta bien entonces 3
+
+        //3- pedir un espacio en heap para 1 empleado
+        //si el espacio se creo entonces 4
+
+        //4- guardar ese espacio en la linked list
+        //si 4 esta bien entonces 5
+
+        //5-
+    }
+
+
+    return retorno;
 }
 
 

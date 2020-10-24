@@ -209,7 +209,7 @@
 	"LinkedList.h"
 	"Employee.h"
 
-1603449880 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.c
+1603569553 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -219,7 +219,7 @@
 
 1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\linkedlist.h
 
-1603449880 c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.h
+1603569553 c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.h
 
 1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\parser.h
 
@@ -242,4 +242,13 @@
 	<stdlib.h>
 	"Employee.h"
 	<string.h>
+
+1603569553 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+
+1601599524 c:\users\arisp\desktop\trabajo_practico_1\tp3\utn.h
 

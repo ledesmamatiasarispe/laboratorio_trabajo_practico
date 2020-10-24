@@ -1,6 +1,48 @@
 #include <stdlib.h>
 #include "Employee.h"
 #include <string.h>
+#include "utn.h"
+
+
+int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet)
+{
+    int retorno = -1;
+    char auxInput[1024];
+    if(this!=NULL && punteroSet != NULL )//validar parametros
+    {
+        retorno = 0;//validaron los parametros
+        if(
+            getValidString(mensaje,"Error! reintente nuevamente",
+                           "Error! limite de caracteres superado",auxInput,strlen(auxInput),3)==0 &&
+            punteroSet(this,auxInput) == 0
+        )
+        {
+          retorno = 1;
+        }
+
+    }
+    return retorno;
+}
+
+
+int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet)
+{
+    int retorno = -1;
+    int auxInput;
+    if(this!=NULL && punteroSet != NULL )//validar parametros
+    {
+        retorno = 0;//validaron los parametros
+        if(
+            getValidInt(mensaje,"Error! reintente nuevamente",auxInput,min,max,3)==0 &&
+            punteroSet(this,auxInput) == 0
+        )
+        {
+          retorno = 1;
+        }
+
+    }
+    return retorno;
+}
 
 
 int employee_setId(Employee* this,int id)
@@ -13,6 +55,7 @@ int employee_setId(Employee* this,int id)
     }
     return retorno;
 }
+
 int employee_getId(Employee* this,int* id)
 {
     int retorno = -1;
