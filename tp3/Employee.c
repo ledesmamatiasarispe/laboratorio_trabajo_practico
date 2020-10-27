@@ -3,7 +3,50 @@
 #include <string.h>
 #include "utn.h"
 
+///@brief crea un nuevo eempleado en heap y devuelve su &mdir. siendo todos los miembros valores por defecto .
+Employee* employee_new()
+{
+    Employee* auxEmployee = NULL;//creo el aux que va contener el puntero localmente
 
+   auxEmployee = (Employee*) malloc(sizeof(Employee)); // le pido a malloc que reserve una porcion de heap y me diga donde la consiguio
+    if(auxEmployee!=NULL)//asigno valores por defectos para no tener basura y asi no mostrarla
+    {
+        employee_setHorasTrabajadas(auxEmployee,24);
+        employee_setId(auxEmployee,0);
+        employee_setNombre(auxEmployee,"nombre");
+        employee_setSueldo(auxEmployee,18000);
+    }
+
+    return auxEmployee;//retorno la direccion de memoria
+}
+
+///@brief crea un nuevo eempleado en heap y devuelve su &mdir ,
+///al mismo tiempo asignandole valores a cada miembro
+Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
+{
+    Employee* auxEmployee = NULL;
+   auxEmployee = (Employee*) malloc(sizeof(Employee));
+    if(auxEmployee!=NULL)//asigno valores
+    {
+        employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr));
+        employee_setId(auxEmployee,atoi(idStr));
+        employee_setNombre(auxEmployee,nombreStr);
+        employee_setSueldo(auxEmployee,atoi(sueldoStr));
+    }
+    return auxEmployee;
+}
+
+
+
+
+/** \brief
+ *
+ * \param mensaje[] char un mensaje que se va a mostrar al momento de ingresar el valor
+ * \param this Employee* el puntero donde se encuentra la estructura
+ * \param punteroSet employee_setString es un funcion que asinga el dato en el un miembro de ka estructura
+ * \return int -1 fallo de parametros. 0 parametros validaron. 1 se pudo asignar el dato correctamente.
+ *
+ */
 int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet)
 {
     int retorno = -1;
@@ -33,7 +76,7 @@ int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_
     {
         retorno = 0;//validaron los parametros
         if(
-            getValidInt(mensaje,"Error! reintente nuevamente",auxInput,min,max,3)==0 &&
+            getValidInt(mensaje,"Error! reintente nuevamente",&auxInput,min,max,3)==0 &&
             punteroSet(this,auxInput) == 0
         )
         {
@@ -162,3 +205,4 @@ int employee_CompareById(Employee* e1, Employee* e2)
 
     return retorno;
 }
+

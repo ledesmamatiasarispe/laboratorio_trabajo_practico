@@ -21,8 +21,11 @@
 
 int main()
 {
+LinkedList* listaDeEmpleados;
+char path[50] ={"data.csv"};
+listaDeEmpleados = ll_newLinkedList();
 
 
-
+controller_loadFromText(path,listaDeEmpleados);
     return 0;
 }

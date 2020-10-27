@@ -11,6 +11,9 @@ typedef struct
 typedef int (*employee_setString)(Employee*,char*);
 typedef int (*employee_setInt)(Employee*,int);
 
+int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet);
+int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet);
+
 Employee* employee_new();
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr);
 void employee_delete();
