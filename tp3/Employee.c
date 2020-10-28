@@ -2,8 +2,8 @@
 #include "Employee.h"
 #include <string.h>
 #include "utn.h"
-
-///@brief crea un nuevo eempleado en heap y devuelve su &mdir. siendo todos los miembros valores por defecto .
+#include <stdio.h>
+///@brief crea un nuevo eempleado en heap y devuelve su &mdir. Siendo todos los miembros, valores por defecto .
 Employee* employee_new()
 {
     Employee* auxEmployee = NULL;//creo el aux que va contener el puntero localmente
@@ -25,7 +25,7 @@ Employee* employee_new()
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* auxEmployee = NULL;
-   auxEmployee = (Employee*) malloc(sizeof(Employee));
+   auxEmployee = (Employee*)malloc(sizeof(Employee));
     if(auxEmployee!=NULL)//asigno valores
     {
         employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr));
@@ -39,7 +39,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 
 
 
-/** \brief
+/** \brief muestra un mensaje para ingresar por consola un nombre, apellido ,etc.
  *
  * \param mensaje[] char un mensaje que se va a mostrar al momento de ingresar el valor
  * \param this Employee* el puntero donde se encuentra la estructura
@@ -116,7 +116,7 @@ int employee_setNombre(Employee* this,char* nombre)
     if(this!=NULL && nombre != NULL)
     {
         retorno = 0;
-        strncpy(this->nombre,nombre,strlen(this->nombre));
+        strncpy(this->nombre,nombre,40);
     }
     return retorno;
 }
@@ -127,7 +127,7 @@ int employee_getNombre(Employee* this,char* nombre)
     if(this!=NULL && nombre != NULL)
     {
         retorno = 0;
-        strncpy(nombre,this->nombre,strlen(nombre));
+        strncpy(nombre,this->nombre,40);
     }
     return retorno;
 }
@@ -206,3 +206,21 @@ int employee_CompareById(Employee* e1, Employee* e2)
     return retorno;
 }
 
+int employee_PrintOnConsole(Employee* this)
+{
+    int retorno = -1 ;/* retorno de la funcion*/
+    if(this != NULL){
+
+        int auxId,auxSueldo,auxHorasTrabajadas;
+        char auxNombre[50];
+
+        employee_getId(this,&auxId);
+        employee_getNombre(this,auxNombre);
+        employee_getSueldo(this,&auxSueldo);
+        employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
+        printf("%10d %20s %10d %10d \n",auxId,auxNombre,auxSueldo,auxHorasTrabajadas);
+
+
+    }
+return retorno;
+}

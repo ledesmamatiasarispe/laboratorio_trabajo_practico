@@ -27,5 +27,7 @@ listaDeEmpleados = ll_newLinkedList();
 
 
 controller_loadFromText(path,listaDeEmpleados);
+
+controller_ListEmployee(listaDeEmpleados);
     return 0;
 }

@@ -16,17 +16,20 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 {
     int retorno = -1 ;
     if(path!=NULL && pArrayListEmployee != NULL){
+
           FILE* pFile;
           retorno=1;
           /* validaron los datos*/
-          if( pFile = fopen(path,"r") == NULL){ /* esta linea abre el archivo pasado como path */
+          if( (pFile = fopen(path,"r")) != NULL){ /* esta linea abre el archivo pasado como path */
             retorno=2;
-            /* E archivo se cargo correctamente */
+
+                /* El archivo se cargo correctamente */
+                /* employeeFromText parsea el archivo y guarda los datos en la linked list*/
+                if(parser_EmployeeFromText(pFile,pArrayListEmployee) == 0){
+                    retorno = 0;
+                }
           }
-          /* employeeFromText parsea el archivo y guarda los datos en la linked list*/
-        if(parser_EmployeeFromText(pFile,pArrayListEmployee) == 0){
-            retorno = 0;
-        }
+
     }
     return retorno;
 }
@@ -94,7 +97,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 }
 
 
-/** \brief
+/** \brief imprime una lista de todos los empleados a los que apunta LinkedList
  *
  * \param pArrayListEmployee LinkedList* el puntero a la lList de empleados
  * \return int retornara -1 caso sean invalidos las parametros actuales,
@@ -103,12 +106,24 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    int retorno = -1;
+    int retorno = -1,lenLList;/*variables para la lista */
+    int i;/* control del for */
     if(pArrayListEmployee != NULL)
     {
-        retorno=0;
 
+        Employee* auxPEmpleadoActual; /* puntero al empleado de la iteracion actual */
+        retorno = 0;
+        lenLList = ll_len(pArrayListEmployee);/* consigue el largo atual de la llist*/
+        for(i=0;i<lenLList;i++){
 
+          /* consigo el puntero al epleado de la iteracion actual, y lo casteo de *void a *Empleado */
+            if((auxPEmpleadoActual = (Employee*)ll_get(pArrayListEmployee,i) ) != NULL){
+                /*si el puntero existe, entonces puedo imprimir el empleado*/
+                employee_PrintOnConsole(auxPEmpleadoActual);
+
+            }
+
+        }
 
 
     }

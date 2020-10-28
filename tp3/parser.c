@@ -5,6 +5,7 @@
 
 int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 {
+
     int retorno = -1;
     Employee* AuxEmployee;
     int datosEscaneados;
@@ -12,7 +13,12 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
     //recibe el pfile ya abierto y lo carga en un  liked list al final
     if(pFile!=NULL && pArrayListEmployee != NULL){
         retorno = 1;
-        while(feof(pFile)){
+        /*la lista tiene una cabecera en el primer renglon. Este fscanf la "lee"
+         y deja el puntero al principo del proximo empleado,
+         el cual si es un dato valido */
+        fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",auxId,auxNombre,auxHoras,auxSueldo);
+
+        while(!feof(pFile)){
             /* el fscanf separa los datos y los asigna a las variables correctas */
             datosEscaneados = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",auxId,auxNombre,auxHoras,auxSueldo);
             if(datosEscaneados=4){
