@@ -215,7 +215,7 @@ void getString(char mensaje[],char input[])
     printf("%s",mensaje);
     clearStdin();
 
-   scanf("%[^/n] ", input);
+   scanf("%[^\n]", input);
 }
 
 /**
@@ -466,7 +466,9 @@ void pause(void)
  */
 void clearScreen(void)
 {
+
     system("cls");
+
 }
 
 

@@ -3,7 +3,7 @@
 typedef struct
 {
     int id;
-    char nombre[40];
+    char nombre[128];
     int horasTrabajadas;
     int sueldo;
 }Employee;
@@ -33,4 +33,7 @@ int employee_getSueldo(Employee* this,int* sueldo);
 int employee_CompareByName(Employee* e1, Employee* e2);
 int employee_CompareById(Employee* e1, Employee* e2);
 
+
+
+int employee_setNewId(Employee* this,int id);
 #endif // employee_H_INCLUDED
