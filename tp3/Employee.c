@@ -14,13 +14,6 @@ Employee* employee_new()
     Employee* auxEmployee = NULL;//creo el aux que va contener el puntero localmente
 
    auxEmployee = (Employee*) malloc(sizeof(Employee)); // le pido a malloc que reserve una porcion de heap y me diga donde la consiguio
-    if(auxEmployee!=NULL)//asigno valores por defectos para no tener basura y asi no mostrarla
-    {
-        employee_setHorasTrabajadas(auxEmployee,24);
-        employee_setId(auxEmployee,0);
-        employee_setNombre(auxEmployee,"nombre");
-        employee_setSueldo(auxEmployee,18000);
-    }
 
     return auxEmployee;//retorno la direccion de memoria
 }
@@ -30,21 +23,37 @@ Employee* employee_new()
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* auxEmployee = NULL;
-   auxEmployee = (Employee*)malloc(sizeof(Employee));
+
+   auxEmployee = employee_new();
     if(auxEmployee!=NULL)//asigno valores
     {
+        if(employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr)) != 0 ||
+           employee_setNewId(auxEmployee,atoi(idStr)) != 0 ||
+           employee_setNombre(auxEmployee,nombreStr) != 0 ||
+           employee_setSueldo(auxEmployee,atoi(sueldoStr)) != 0){
 
-        employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr));
-        employee_setNewId(auxEmployee,atoi(idStr));
-        //employee_setId(auxEmployee,atoi(idStr));
-        employee_setNombre(auxEmployee,nombreStr);
-        employee_setSueldo(auxEmployee,atoi(sueldoStr));
+
+
+         free(auxEmployee);
+         auxEmployee = NULL;
+
+
+        }
+
     }
     return auxEmployee;
 }
 
+int employee_delete(Employee* this){
 
-
+int retorno=-1;
+ if(this != NULL)
+ {
+     free(this);
+     retorno = 0;
+ }
+ return retorno;
+}
 
 /** \brief muestra un mensaje para ingresar por consola un nombre, apellido ,etc.
  *
@@ -89,7 +98,6 @@ int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_
         {
           retorno = 1;
         }
-
     }
     return retorno;
 }
@@ -98,8 +106,10 @@ int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_
 int employee_setId(Employee* this,int id)
 {
     int retorno = -1;
+
     if(this!=NULL && id >= 0)
     {
+
         retorno = 0;
         this->id = id;
     }
@@ -142,9 +152,11 @@ int employee_getNombre(Employee* this,char* nombre)
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int retorno = -1;
+
     if(this!=NULL && horasTrabajadas >= 0)
     {
         retorno = 0;
+
         this->horasTrabajadas = horasTrabajadas;
     }
     return retorno;
@@ -195,20 +207,15 @@ int employee_CompareById(Employee* e1, Employee* e2)
     int id1,id2,comparacion,retorno;
     employee_getId(e1,&id1);
     employee_getId(e2,&id2);
-    comparacion = id1 - id2;
-    if(comparacion > 0)
-    {
-        retorno = 1;
-    }else
-     {
-         if(comparacion < 0)
-         {
-             retorno = -1;
-         }else
-          {
-              retorno = 0;
-          }
-     }
+        if(id1 > id2)
+        {
+            retorno = 1;
+        }else
+        {
+            retorno = 0 ;
+        }
+
+
 
     return retorno;
 }
@@ -219,6 +226,7 @@ int employee_setNewId(Employee* this,int id)
 {
     static int maxId = 0;
     int retorno = -1 ;
+
     /* creo que no tiene sentido guardar este int en memoria dinamica,
     porque para eso necesitaria un puntero a esa memoria haciendo el todo el esfuerzo inutil */
     if(this!=NULL){

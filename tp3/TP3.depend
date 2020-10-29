@@ -209,41 +209,41 @@
 	"LinkedList.h"
 	"Employee.h"
 
-1603949856 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.c
+1604000982 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	"Controller.h"
+
+1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\linkedlist.h
+
+1603986228 c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.h
+	"LinkedList.h"
+
+1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\parser.h
+
+1604000412 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Controller.h"
+	"Employee.h"
+	"utn.h"
+
+1603987462 c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.h
 	"LinkedList.h"
 	"Employee.h"
 	"parser.h"
 	"display.h"
 	"utn.h"
-	"Controller.h"
 
-1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\linkedlist.h
-
-1603932509 c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.h
-
-1603449882 c:\users\arisp\desktop\trabajo_practico_1\tp3\parser.h
-
-1603949384 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\main.c
-	<stdio.h>
-	<stdlib.h>
-	"LinkedList.h"
-	"Controller.h"
-	"Employee.h"
-	"utn.h"
-
-1603943748 c:\users\arisp\desktop\trabajo_practico_1\tp3\controller.h
-
-1603933514 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\parser.c
+1603996040 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\parser.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
 	"Employee.h"
 
-1603950204 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.c
+1603996413 source:c:\users\arisp\desktop\trabajo_practico_1\tp3\employee.c
 	<stdlib.h>
 	"Employee.h"
 	<string.h>

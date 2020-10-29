@@ -27,6 +27,7 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
                     tomados por el fscanf. luego ll_add añade ese *empleado a la llist  */
                     if((AuxEmployee = employee_newParametros(auxId,auxNombre,auxHoras,auxSueldo))!=NULL)
                     {
+
                          ll_add(pArrayListEmployee,AuxEmployee);
                           retorno = 0;
                     }

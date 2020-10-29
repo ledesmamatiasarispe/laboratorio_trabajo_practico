@@ -2,12 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "LinkedList.h"
-#include "Employee.h"
-#include "parser.h"
-#include "display.h"
-#include "utn.h"
 #include "Controller.h"
+
+
 /**
 * @brief carga un txt en la linked list
 *
@@ -94,8 +91,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
                  employee_ingresarString("\ningrese el nombre : ",auxEmployee,employee_setNombre)==1
           ){
                   /*4- guardar ese espacio en la linked list*/
-                if( ll_add(pArrayListEmployee,auxEmployee) == 0 ) //si 4 esta bien entonces 5
-                {
+                if( ll_add(pArrayListEmployee,auxEmployee) == 0 ){ //si 4 esta bien entonces 5
                     retorno = 0; //5-retornar que todo salio bien
                 }
           }
@@ -194,7 +190,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
                 if(auxEmployee!=NULL && confirmarModificacion == 's' ){
 
                     ll_remove(pArrayListEmployee,LinkedListIndex);
-                    free(auxEmployee);
+                    employee_delete(auxEmployee);
 
                 }
             }
@@ -202,7 +198,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 
 
-    return 1;
+    return retorno;
 }
 
 
@@ -249,9 +245,39 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 }
 
 
-int controller_sortEmployee(LinkedList* pArrayListEmployee)
+int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pcompare)
 {
-    return 1;
+    int retorno = -1,len,i,j,index1,index2;
+    if(pArrayListEmployee != NULL){
+        retorno = 1;
+        Employee* element1;
+        Employee* element2;
+        len = ll_len(pArrayListEmployee);
+        for(i=0;i<len-1;i++)
+        {
+                for(j=i+1;j<len;j++)
+                {
+
+                     if((element1 = (Employee*)ll_get(pArrayListEmployee,i))!=NULL &&
+                        (element2 = (Employee*)ll_get(pArrayListEmployee,j))!=NULL)
+                     {
+
+                        if(pcompare(element1,element2) == 1)
+                        {
+
+                            Employee aux;
+                            aux = *element1;
+                            *element1 = *element2 ;
+                            *element2 = aux;
+
+
+                        }
+                     }
+                }
+        }
+        retorno=0;
+    }
+    return retorno;
 }
 
 
@@ -323,13 +349,45 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 
 
 int controler_imprimirUnaTablaDe1(Employee* this)
-                    {
-                        int retorno = -1;
-                        if(this!=NULL){
-                            retorno = 0;
-                            employee_cabezeraDeLista();
-                            display_PrintEmployeeOnConsole(this);
-                            display_bottomTabla();
-                        }
-                          return retorno;
-                    }
+{
+    int retorno = -1;
+    if(this!=NULL){
+        retorno = 0;
+        employee_cabezeraDeLista();
+        display_PrintEmployeeOnConsole(this);
+        display_bottomTabla();
+    }
+return retorno;
+}
+
+
+int controler_LinkedListBorradoCompleto(LinkedList* list){
+
+int retorno = -1;
+    if(list != NULL){
+          retorno = 1;
+          int i,len;
+          Employee* element;
+          len = ll_len(list);
+
+          for(i=0;i<len;i++){
+              if((element = (Employee*)ll_get(list,i)) !=NULL)
+              {
+                  retorno = 0;
+                  free(element);
+              }else
+                  {
+                      retorno =2;
+                      break;
+                  }
+           }
+            ll_clear(list);
+    }
+
+return retorno;
+}
+
+
+
+
+
