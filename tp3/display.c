@@ -3,24 +3,33 @@
 
 
 
+/** \brief
+ *
+ * \param this void*
+ * \return int int -1 parametros invalidos, 1 validaron los parametros , 0 funciono todo correctamente.
+ *
+ */
 int display_PrintEmployeeOnConsole(void* this)
 {
-    int ll = 186;/*chars locos que voy a usar en el printf*/
+    int ll = 186;/*chars que voy a usar en el printf*/
     int retorno = -1 ;/* retorno de la funcion*/
     if(this != NULL){
-
+        retorno = 1;
         int auxId,auxSueldo,auxHorasTrabajadas;
         char auxNombre[50];
-
-        employee_getId(this,&auxId);
-        employee_getNombre(this,auxNombre);
-        employee_getSueldo(this,&auxSueldo);
-        employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
-        printf("%c %10d %c %20s %c %10d %c %20d %c  \n",ll,auxId,ll,auxNombre,ll,auxSueldo,ll,auxHorasTrabajadas,ll);
-
+        if
+        (
+            employee_getId(this,&auxId) == 0 &&
+            employee_getNombre(this,auxNombre)== 0 &&
+            employee_getSueldo(this,&auxSueldo)== 0 &&
+            employee_getHorasTrabajadas(this,&auxHorasTrabajadas) == 0
+        )
+        {
+            printf("%c %10d %c %20s %c %10d %c %20d %c  \n",ll,auxId,ll,auxNombre,ll,auxSueldo,ll,auxHorasTrabajadas,ll);
+            retorno = 0;
+        }
     }
 return retorno;
-
 }
 
 void employee_cabezeraDeLista()

@@ -11,7 +11,7 @@
     * 4. Modificar datos de empleado
     * 5. Baja de empleado
     * 6. Listar empleados
-     7. Ordenar empleados
+    * 7. Ordenar empleados
     * 8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
     * 9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
     * 10. Salir
@@ -182,7 +182,7 @@ int main()
                     printf("la lista ya esta vacia.\1\n");
                         pause();
                 }else{
-                    if(controler_LinkedListBorradoCompleto(listaDeEmpleados) == 0)
+                    if(controler_vaciarLinkedList(listaDeEmpleados) == 0)
                     {
                         printf("\n se borro todo");
                         pause();

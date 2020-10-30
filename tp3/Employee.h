@@ -7,14 +7,37 @@ typedef struct
     char nombre[128];
     int horasTrabajadas;
     int sueldo;
-}Employee;
+} Employee;
 
+/*estos dos typedef representan a los setters  */
 typedef int (*employee_setString)(Employee*,char*);
 typedef int (*employee_setInt)(Employee*,int);
-
+/*y este a la comparacion de nombre y id */
 typedef int (*employee_CompareBy)(Employee*, Employee*);
 
+
+/** \brief
+ *
+ * \param mensaje[] char un mensaje que se muestra en
+  pantalla antes de pedir el ingreso de un int
+ * \param max int el limite maximo por el cual validar el valor ingresado
+ * \param min int el limite maximo por el cual validar el valor ingresado
+ * \param this Employee* es el puntero al empleado donde se prodiciran los cambios
+ * \param punteroSet employee_setInt es el puntero a un setter cualesquiera que permita
+  modificar un miembro de la funcion que sea un entero
+ * \return int retorna -1 no validaron los parametros, 0 validaron los parametros, 1 todo funciono correctamente.
+ *
+ */
 int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet);
+
+/** \brief
+ *
+ * \param mensaje[] char
+ * \param this Employee*
+ * \param punteroSet employee_setString
+ * \return int
+ *
+ */
 int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet);
 
 Employee* employee_new();

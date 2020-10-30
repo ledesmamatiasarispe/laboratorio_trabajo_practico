@@ -201,6 +201,7 @@ int employee_CompareByName(Employee* e1, Employee* e2)
 
     return strcmp(name1,name2);
 }
+
 int employee_CompareById(Employee* e1, Employee* e2)
 {
 
