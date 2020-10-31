@@ -246,7 +246,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
         Employee* element1;
         Employee* element2;
         len = ll_len(pArrayListEmployee);
-       //auxProgressbar = len / 20;
+
         for(i=0;i<len-1;i++)
         {
             for(j=i+1;j<len;j++)
@@ -268,18 +268,6 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
                  }
             }
             barraDeProgreso(i,len);
-
-            /*
-            if( i % auxProgressbar == 0 || i == len-2)
-            {
-                clearScreen();
-                auxProgres = (i*100)/len+1;
-                printf(" %d %c  ",auxProgres,37);
-                display_imprimirUnCharVariasVeces(220,auxProgres);
-                display_imprimirUnCharVariasVeces(32,(100-auxProgres));
-                display_imprimirUnCharVariasVeces(219,1);
-            }
-            */
         }
         retorno=0;
     }
