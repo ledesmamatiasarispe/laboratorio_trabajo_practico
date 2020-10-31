@@ -4,6 +4,7 @@
 #include "Employee.h"
 #include "utn.h"
 /****************************************************
+*Arispe Matias
     Menu:
     * 1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
     * 2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
@@ -76,15 +77,23 @@ int main()
                 break;
 
             case 3: /* dar de alta */
-                 if(ListLen == 0)
+                 switch(ListLen)
                 {
-                    printf("\n la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
+                case 0: /* puede pasar de largo   */
+                    printf("\n la lista esta vacia!\n");
+                    opcionIngresada = getChar("¿desea agregar un empleado igualmente? (s/N)");
+                    opcionIngresada = tolower(opcionIngresada);
+                    if(opcionIngresada != 's')
+                    {
+                       break;
+                    }
+
+                 case 1:
                     printf("se esta cargando un nuevo empleado\n\n");
                     controller_addEmployee(listaDeEmpleados);
                     pause();
-                }
+                    break;
+                 }
                 break;
 
             case 4: /* modificar */

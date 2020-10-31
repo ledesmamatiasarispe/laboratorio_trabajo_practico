@@ -68,7 +68,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     /*1- validar parametros DE LA FUNCION*/
     if(pArrayListEmployee!=NULL)
     {
-        int id;
+        int id = 0;
         Employee* auxEmployee;
 
         retorno = 1; /*validaron los parametros*/
@@ -76,7 +76,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
         auxEmployee =  employee_new();/*2- pedir un espacio en heap para 1 empleado*/
         if(auxEmployee!=NULL)/*si el espacio se creo entonces 3*/
         {
-             employee_getId(auxEmployee,&id);/*3- ingresar los datos para el empleado en un aux*/
+            //employee_getId(auxEmployee,&id);/*3- ingresar los datos para el empleado en un aux*/
             if
             (/*si todo esta bien entonces 4*/
                 employee_setNewId(auxEmployee,id) == 0 &&
@@ -383,6 +383,8 @@ int retorno = -1;
         {
             if((element = (Employee*)ll_get(list,i)) !=NULL)
             {
+                printf("borro u nelemento");
+                employee_imprimirUnaTablaDe1(element);
                 retorno = 0;
                 free(element);
             }else
