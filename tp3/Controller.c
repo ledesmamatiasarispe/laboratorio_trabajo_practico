@@ -271,7 +271,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
                      return 2;
                  }
             }
-            if( i % auxProgressbar == 0 )
+            if( i % auxProgressbar == 0 || i == len-2)
             {
                 clearScreen();
                 auxProgres = (i*100)/len+1;
