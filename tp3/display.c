@@ -103,7 +103,7 @@ void imprimirOpciones(char opciones[])
 
 }
 
-void barraDeProgreso(int progresoActual,int cantidadTotal)
+void imprimirProgreso(int progresoActual,int cantidadTotal)
 {
     if( progresoActual % (cantidadTotal/20) == 0 || progresoActual == cantidadTotal-2)
     {

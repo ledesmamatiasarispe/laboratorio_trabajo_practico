@@ -13,4 +13,6 @@ void display_topTabla(void);
 
 void display_imprimirUnCharVariasVeces(int caracter, int cantidad);
 
+void imprimirProgreso(int progresoActual,int cantidadTotal);
+
 #endif // DISPLAY_H_INCLUDED

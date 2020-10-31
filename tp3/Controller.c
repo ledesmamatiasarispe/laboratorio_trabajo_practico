@@ -241,7 +241,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
     if(pArrayListEmployee != NULL)
     {
         retorno = 1;
-        int len , i , j , auxProgressbar,auxProgres ;
+        int len , i , j ;
 
         Employee* element1;
         Employee* element2;
@@ -267,7 +267,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
                      return 2;
                  }
             }
-            barraDeProgreso(i,len);
+            imprimirProgreso(i,len);
         }
         retorno=0;
     }
