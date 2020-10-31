@@ -11,11 +11,11 @@
 ///@brief crea un nuevo eempleado en heap y devuelve su &mdir. Siendo todos los miembros, valores por defecto .
 Employee* employee_new()
 {
-    Employee* auxEmployee = NULL;//creo el aux que va contener el puntero localmente
+    Employee* auxEmployee = NULL;
 
-    auxEmployee = (Employee*) malloc(sizeof(Employee)); // le pido a malloc que reserve una porcion de heap y me diga donde la consiguio
+    auxEmployee = (Employee*) malloc(sizeof(Employee));
 
-    return auxEmployee;//retorno la direccion de memoria
+    return auxEmployee;
 }
 
 ///@brief crea un nuevo eempleado en heap y devuelve su &mdir ,
@@ -27,7 +27,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
     {
         if((auxEmployee = employee_new())!= NULL)
         {
-            if(auxEmployee!=NULL)//asigno valores
+            if(auxEmployee!=NULL)
             {
                 if
                 (
@@ -61,10 +61,10 @@ int retorno=-1;
 int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet)
 {
     int retorno = -1;
-    if(this!=NULL && punteroSet != NULL )//validar parametros
+    if(this!=NULL && punteroSet != NULL )
     {
         char auxInput[1024];
-        retorno = 0;//validaron los parametros
+        retorno = 0;
         if
         (
             getValidString(mensaje,"Error! reintente nuevamente",
@@ -82,10 +82,10 @@ int employee_ingresarString(char mensaje[],Employee* this,employee_setString pun
 int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet)
 {
     int retorno = -1;
-    if(this!=NULL && punteroSet != NULL )//validar parametros
+    if(this!=NULL && punteroSet != NULL )
     {
         int auxInput;
-        retorno = 0;//validaron los parametros
+        retorno = 0;
         if(
             getValidInt(mensaje,"Error! reintente nuevamente",&auxInput,min,max,3)==0 &&
             punteroSet(this,auxInput) == 0
@@ -220,8 +220,7 @@ int employee_setNewId(Employee* this,int id)
 {
 
     int retorno = -1 ;
-    static int maxId = 0; /* creo que no tiene sentido guardar este int en memoria dinamica,
-        porque para eso necesitaria un puntero a esa memoria haciendo el todo el esfuerzo inutil */
+    static int maxId = 0;
     if(this!=NULL)
     {
         retorno = 1;
@@ -255,19 +254,17 @@ Employee* employee_getById(LinkedList* pListaDeEmpleados,int id)
     {
         int i,len,idActual;
         len = ll_len(pListaDeEmpleados);
-        for(i=0;i<len;i++) /* este for va  a iterar hasta que la lista se haya recorrido por completo o... */
+        for(i=0;i<len;i++)
         {
            if(( retorno = (Employee*)ll_get(pListaDeEmpleados,i)) != NULL)
            {
                 employee_getId(retorno,&idActual);
                 if(idActual == id)
                 {
-                    break; /* hasta que se active este break cuando el id coincida */
+                    break;
                 }
             }
-            retorno = NULL;/* la unica forma de llegar a esta linea de codigo es que el id no se haya encontrado.
-            en ese caso, retorno saldria del for con el ultimo empleado cargado en ella. asignandole NULL en esta linea
-            logro que no retorne nada en este caso anterior.   */
+            retorno = NULL;
         }
     }
     return retorno;
@@ -309,9 +306,9 @@ int employee_imprimirUnaTablaDe1(Employee* this)
     if(this!=NULL)
     {
         retorno = 0;
-        employee_cabezeraDeLista();
+        employee_imprimirLaCabezeraDeLista();
         display_PrintEmployeeOnConsole(this);
-        display_bottomTabla();
+        display_imprimirElFinalDeTabla();
     }
 return retorno;
 }

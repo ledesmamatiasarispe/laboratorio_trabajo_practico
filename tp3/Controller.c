@@ -12,13 +12,12 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     if(path!=NULL && pArrayListEmployee != NULL)
     {
         FILE* pFile;
-        retorno=1;  /* validaron los parametros*/
+        retorno=1;
 
-        if( (pFile = fopen(path,"r")) != NULL)/* esta linea abre el archivo pasado como path */
+        if( (pFile = fopen(path,"r")) != NULL)
         {
-            retorno=2; /* El archivo se cargo correctamente */
+            retorno=2;
 
-            /* employeeFromText parsea el archivo y guarda los datos en la linked list*/
             if(parser_EmployeeFromText(pFile,pArrayListEmployee) == 0)
             {
                 retorno = 0;
@@ -37,13 +36,11 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
     {
         FILE* pFile;
         retorno=1;
-        /* validaron los datos*/
-        if( (pFile = fopen(path,"rb")) != NULL) /* esta linea abre el archivo pasado como path */
+
+        if( (pFile = fopen(path,"rb")) != NULL)
         {
 
-            retorno=2;  /* El archivo se cargo correctamente */
-
-            /* employeeFromText parsea el archivo y guarda los datos en la linked list*/
+            retorno=2;
 
             if(parser_EmployeeFromBinary(pFile,pArrayListEmployee) == 0)
             {
@@ -65,20 +62,20 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-    /*1- validar parametros DE LA FUNCION*/
+
     if(pArrayListEmployee!=NULL)
     {
+        retorno = 1;
         int id = 0;
         Employee* auxEmployee;
 
-        retorno = 1; /*validaron los parametros*/
 
-        auxEmployee =  employee_new();/*2- pedir un espacio en heap para 1 empleado*/
-        if(auxEmployee!=NULL)/*si el espacio se creo entonces 3*/
+        auxEmployee =  employee_new();
+        if(auxEmployee!=NULL)
         {
-            //employee_getId(auxEmployee,&id);/*3- ingresar los datos para el empleado en un aux*/
+            employee_getId(auxEmployee,&id);
             if
-            (/*si todo esta bien entonces 4*/
+            (
                 employee_setNewId(auxEmployee,id) == 0 &&
                 employee_ingresarInt("\ningrese el sueldo.[_______]\b\b\b\b\b\b\b\b",
                                     200000,1,auxEmployee,employee_setSueldo) == 1 &&
@@ -89,10 +86,9 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
                 employee_ingresarString("\ningrese el nombre : ",auxEmployee,employee_setNombre) == 1
             )
             {
-                /*4- guardar ese espacio en la linked list*/
                 if( ll_add(pArrayListEmployee,auxEmployee) == 0 )
-                { //si 4 esta bien entonces 5
-                    retorno = 0; //5-retornar que todo salio bien
+                {
+                    retorno = 0;
                 }
             }
         }
@@ -106,14 +102,14 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
 
     if(pArrayListEmployee!=NULL)
-    { /*1- validar parametros DE LA FUNCION*/
+    {
         int id,opcionIngresada;
         char confirmarModificacion= '\0';
 
         Employee* auxEmployee;
         Employee employeeActual;
 
-        retorno = 1; /*validaron los parametros*/
+        retorno = 1;
         do{
             controller_ListEmployee(pArrayListEmployee);
             if
@@ -121,45 +117,44 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                 getValidInt("\ningrese el ID del usuario a modificar : ",
                             "\nerror!, el valor ingresado esta fuera de rango o no es un entero valido\n",&id,1,32767,3) == 0
             )
-            { /* ingreso el id de el usuario a modificar*/
+            {
                 if((auxEmployee = employee_getById(pArrayListEmployee,id)) != NULL)
-                {/*consigo el usuario con el id que se ingreso y verifico si es valido el puntero que consegui*/
+                {
 
-                    employee_imprimirUnaTablaDe1(auxEmployee);/* imprime el empleado que se consiguio */
+                    employee_imprimirUnaTablaDe1(auxEmployee);
                     confirmarModificacion = getChar("¿desea modificar este empleado? (S/n)");
                     confirmarModificacion = tolower(confirmarModificacion);
 
                     if(auxEmployee!=NULL && confirmarModificacion != 'n' )
                     {
-                        employeeActual = *auxEmployee; /* guardo los valores del empleado en una variable local para no
-                                                        perder los datos anteriores en caso de que se arrepientan a ultimo momento de lo que se ingreso */
+                        employeeActual = *auxEmployee;
 
-                        printf("modificar :\n1-nombre\n-2-sueldo\n-3-horas\n-4-Salir ");/* imprime el menu*/
+                        printf("modificar :\n1-nombre\n-2-sueldo\n-3-horas\n-4-Salir ");
                         getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
-                        &opcionIngresada,1,4,3);/* ingresa la opcion del menu */
+                        &opcionIngresada,1,4,3);
 
                         switch(opcionIngresada)
                         {
 
-                            case 1:/*nombre*/
+                            case 1:
                                 employee_ingresarString("\ningrese el nombre : ",&employeeActual,employee_setNombre);
 
                                 break;
-                            case 2:/*sueldo*/
+                            case 2:
                                 employee_ingresarInt("\ningrese el sueldo.[_______]\b\b\b\b\b\b\b\b",
                                                     200000,1, &employeeActual,employee_setSueldo);
                                 break;
-                            case 3:/*horas*/
+                            case 3:
                                     employee_ingresarInt("\ningrese las horas trabajadas [___]\b\b\b\b",
                                                         200,0, &employeeActual,employee_setHorasTrabajadas);
                                     break;
                         }
-                        employee_imprimirUnaTablaDe1(&employeeActual); /*  imprimo el empleado con las modificaciones    */
+                        employee_imprimirUnaTablaDe1(&employeeActual);
                         confirmarModificacion = getChar("¿desea guardar la modificacion? (S/n)");
                         confirmarModificacion = tolower(confirmarModificacion);
                         if(confirmarModificacion != 'n')
                         {
-                            *auxEmployee = employeeActual; /* si el usuario confirmo la modificacionguardo los valores modificados el espacio de memoria original */
+                            *auxEmployee = employeeActual;
                             retorno=0;
                         }
                     }
@@ -181,6 +176,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
+        retorno = 1;
         int LinkedListIndex,id;
         char confirmarModificacion= '\0';
         Employee* auxEmployee;
@@ -192,12 +188,13 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
                         "\nerror!, el valor ingresado esta fuera de rango o no es un entero valido\n",
                         &id,1,32767,3) == 0
         )
-        { /* ingreso el id de el usuario a modificar*/
+        {
             if((auxEmployee = employee_getById(pArrayListEmployee,id))!=NULL)
-            {/*consigo el usuario con el id que se ingreso y verifico si es valido el puntero que consegui*/
+            {
                 LinkedListIndex = employee_getIndexById(pArrayListEmployee,id);
 
-                employee_imprimirUnaTablaDe1(auxEmployee);/* imprime el empleado que se consiguio */
+                employee_imprimirUnaTablaDe1(auxEmployee);
+
                 confirmarModificacion = getChar("¿desea eliminar este empleado? (s/N)");
                 confirmarModificacion = tolower(confirmarModificacion);
 
@@ -205,6 +202,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
                 {
                     ll_remove(pArrayListEmployee,LinkedListIndex);
                     employee_delete(auxEmployee);
+                    retorno = 0;
                 }
             }
         }
@@ -216,24 +214,22 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    int retorno = -1,lenLList;/*variables para la lista */
-    int i;/* control del for */
+    int retorno = -1,lenLList;
+    int i;
     if(pArrayListEmployee != NULL)
     {
-        Employee* auxPEmpleadoActual; /* puntero al empleado de la iteracion actual */
+        Employee* auxPEmpleadoActual;
         retorno = 1;
-        lenLList = ll_len(pArrayListEmployee);/* consigue el largo atual de la llist*/
-        employee_cabezeraDeLista();/*imprime la cabezera de la lista que nombra cada columna */
+        lenLList = ll_len(pArrayListEmployee);
+        employee_imprimirLaCabezeraDeLista();
         for(i=0;i<lenLList;i++)
         {
-            /* consigo el puntero al empleado de la iteracion actual, y lo casteo de *void a *Empleado */
             if((auxPEmpleadoActual = (Employee*)ll_get(pArrayListEmployee,i) ) != NULL)
             {
-                /*si el puntero existe, entonces puedo imprimir el empleado*/
                 display_PrintEmployeeOnConsole(auxPEmpleadoActual);
             }
         }
-        display_bottomTabla(); /* este if imprime los char que cierrar el marco de la lista al final */
+        display_imprimirElFinalDeTabla();
     }
     return retorno;
 }
@@ -250,7 +246,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
         Employee* element1;
         Employee* element2;
         len = ll_len(pArrayListEmployee);
-        auxProgressbar = len / 20;
+       //auxProgressbar = len / 20;
         for(i=0;i<len-1;i++)
         {
             for(j=i+1;j<len;j++)
@@ -271,6 +267,9 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
                      return 2;
                  }
             }
+            barraDeProgreso(i,len);
+
+            /*
             if( i % auxProgressbar == 0 || i == len-2)
             {
                 clearScreen();
@@ -280,6 +279,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee,employee_CompareBy pc
                 display_imprimirUnCharVariasVeces(32,(100-auxProgres));
                 display_imprimirUnCharVariasVeces(219,1);
             }
+            */
         }
         retorno=0;
     }
@@ -383,8 +383,6 @@ int retorno = -1;
         {
             if((element = (Employee*)ll_get(list,i)) !=NULL)
             {
-                printf("borro u nelemento");
-                employee_imprimirUnaTablaDe1(element);
                 retorno = 0;
                 free(element);
             }else

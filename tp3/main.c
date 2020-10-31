@@ -3,6 +3,7 @@
 #include "Controller.h"
 #include "Employee.h"
 #include "utn.h"
+#include "menuOptions.h"
 /****************************************************
 *Arispe Matias
     Menu:
@@ -27,10 +28,8 @@ int main()
     int opcionIngresada, ListLen;
 
     do{
-
-    ListLen = ll_len(listaDeEmpleados);
     clearScreen();
-    printf("opciones :  \n1. Cargar los datos de los empleados desde el archivo data.csv (modo texto)."
+    imprimirOpciones("opciones :  \n1. Cargar los datos de los empleados desde el archivo data.csv (modo texto)."
      "\n2. Cargar los datos de los empleados desde el archivo data.bin (modo binario)."
      "\n3. Alta de empleado"
      "\n4. Modificar datos de empleado"
@@ -46,166 +45,44 @@ int main()
                 &opcionIngresada,0,11,3);
                 clearScreen();
         switch(opcionIngresada){
-            case 1: /* cargar del texto */
-                if(ListLen == 0)
-                {
-                  if(controller_loadFromText("data.csv",listaDeEmpleados) == 0)
-                  {
-                      printf("data.csv se cargo correctamente");
-                      pause();
-                  }
-                }else{
-                     printf("\nya hay un archivo cargado\n");
-                     pause();
-                 }
-
+            case 1:
+                opcion_cargarEmpleadosDesdeCsv("data.csv",listaDeEmpleados);
                 break;
 
-            case 2: /* cargar del binario */
-                if(ListLen == 0)
-                {
-                  if(controller_loadFromBinary("data.bin",listaDeEmpleados) == 0)
-                  {
-                      printf("data.bin se cargo correctamente");
-                      pause();
-                  }
-                }else{
-                     printf("\nya hay un archivo cargado\n");
-                     pause();
-                 }
-
+            case 2:
+                opcion_cargarEmpleadosDesdeBin("data.bin",listaDeEmpleados);
                 break;
 
-            case 3: /* dar de alta */
-                 switch(ListLen)
-                {
-                case 0: /* puede pasar de largo   */
-                    printf("\n la lista esta vacia!\n");
-                    opcionIngresada = getChar("¿desea agregar un empleado igualmente? (s/N)");
-                    opcionIngresada = tolower(opcionIngresada);
-                    if(opcionIngresada != 's')
-                    {
-                       break;
-                    }
-
-                 case 1:
-                    printf("se esta cargando un nuevo empleado\n\n");
-                    controller_addEmployee(listaDeEmpleados);
-                    pause();
-                    break;
-                 }
+            case 3:
+                opcion_darDeAltaAEmpleado(listaDeEmpleados);
                 break;
 
-            case 4: /* modificar */
-                 if(ListLen == 0)
-                {
-                    printf("\n la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
-                    switch(controller_editEmployee(listaDeEmpleados))
-                    {
-                        case 2:
-                            printf("el empleado no existe");
-                            break;
-                    }
-                    pause();
-                }
+            case 4:
+                 opcion_editarEmpleado(listaDeEmpleados);
                 break;
 
-            case 5: /* dar de alta */
-                 if(ListLen == 0)
-                {
-                    printf("\n la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
-                    controller_removeEmployee(listaDeEmpleados);
-                    pause();
-                }
+            case 5:
+                opcion_darDeBajaEmpleado(listaDeEmpleados);
                 break;
 
-            case 6: /* listar empleados */
-                if(ListLen == 0)
-                {
-                    printf("\n la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
-                    controller_ListEmployee(listaDeEmpleados);
-                     pause();
-                }
+            case 6:
+                opcion_listarEmpleados(listaDeEmpleados);
                 break;
 
-            case 7: /* ordenar */
-                if(ListLen == 0)
-                {
-                    printf("\n no se puede ordenar\n "
-                           "la lista esta vacia! cargue un archivo.\1\n");
-                    pause();
-                }else{
-                    printf("opciones :  \n1. ordenar por nombre de a-z"
-                                        "\n2. ordenar por id ");
-                    getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
-                                    &opcionIngresada,1,2,3);
-                    clearScreen();
-                    switch(opcionIngresada)
-                    {
-
-                        case 1:
-                            controller_sortEmployee(listaDeEmpleados,employee_CompareByName);
-                            printf("\n el archivo se  ordeno por nombre");
-                            pause();
-                            break;
-                        case 2:
-                            controller_sortEmployee(listaDeEmpleados,employee_CompareById);
-                            printf("\n el archivo se  ordeno por id");
-                            pause();
-                            break;
-
-                    }
-                }
+            case 7:
+               opcion_ordenarEmpleados(listaDeEmpleados);
                 break;
-            case 8: /* guardar como txt */
-                if(ListLen == 0)
-                {
-                    printf("\n no se puede guardar el archivo\n "
-                           "la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
-                    controller_sortEmployee(listaDeEmpleados,employee_CompareById);
-                    controller_saveAsText("data.csv",listaDeEmpleados);
-                    printf("\n el archivo se guardo correctamente");
-                    pause();
-                }
+            case 8:
+                opcion_save("data.csv",listaDeEmpleados,controller_saveAsText);
                 break;
-            case 9: /* guardar en bin */
-                if(ListLen == 0)
-                {
-                    printf("\n no se puede guardar el archivo\n "
-                           "la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
-                     pause();
-                }else{
-                     controller_sortEmployee(listaDeEmpleados,employee_CompareById);
-                     controller_saveAsBinary("data.bin",listaDeEmpleados);
-                     printf("\n el archivo se guardo correctamente");
+            case 9:
+                 opcion_save("data.bin",listaDeEmpleados,controller_saveAsBinary);
 
-
-
-                     pause();
-                }
                 break;
             case 10: /* borrar todo */
-                if(ListLen == 0)
-                {
-                    printf("la lista ya esta vacia.\1\n");
-                    pause();
-                }else{
-                    if(controler_vaciarLinkedList(listaDeEmpleados) == 0)
-                    {
-                        printf("\n se borro todo");
-                        pause();
-                    }
-                }
+                opcion_vaciarLinkedlist(listaDeEmpleados);
                 break;
-        }/* switch*/
+        }
     } while(opcionIngresada!=11);
 
     return 0;

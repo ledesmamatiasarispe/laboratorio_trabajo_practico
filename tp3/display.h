@@ -5,9 +5,9 @@ int display_PrintEmployeeOnConsole(void* this);
 
 void display_divisorCabezera(void);
 
-void employee_cabezeraDeLista();
+void employee_imprimirLaCabezeraDeLista();
 
-void display_bottomTabla(void);
+void display_imprimirElFinalDeTabla(void);
 
 void display_topTabla(void);
 

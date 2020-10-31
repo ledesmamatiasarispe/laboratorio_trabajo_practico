@@ -6,7 +6,7 @@
 #include "display.h"
 #include "utn.h"
 
-
+typedef int (*controller_saveAs)(char*, LinkedList*);
 
 /** \brief realiza la carga de texto desde el archivo "data.csv"
  *

@@ -33,7 +33,7 @@ int display_PrintEmployeeOnConsole(void* this)
     return retorno;
 }
 
-void employee_cabezeraDeLista()
+void employee_imprimirLaCabezeraDeLista()
 {
       int ll = 186;/*chars locos que voy a usar en el printf*/
         display_topTabla();
@@ -56,7 +56,7 @@ display_imprimirUnCharVariasVeces(185,1);
 display_imprimirUnCharVariasVeces(10,1);
 }
 
-void display_bottomTabla(void)
+void display_imprimirElFinalDeTabla(void)
 {
 display_imprimirUnCharVariasVeces(200,1);
 display_imprimirUnCharVariasVeces(205,12);/*primer int */
@@ -94,5 +94,35 @@ void display_imprimirUnCharVariasVeces(int caracter, int cantidad)
         printf("%c",caracter);
     }
 }
+
+
+void imprimirOpciones(char opciones[])
+{
+
+    printf("\n %s \n " , opciones);
+
+}
+
+void barraDeProgreso(int progresoActual,int cantidadTotal)
+{
+    if( progresoActual % (cantidadTotal/20) == 0 || progresoActual == cantidadTotal-2)
+    {
+        clearScreen();
+        int porcentajeDeProgreso = (progresoActual*100)/cantidadTotal+1;
+
+        printf(" %d %c  ",porcentajeDeProgreso,37);
+        display_imprimirUnCharVariasVeces(220,porcentajeDeProgreso);
+        display_imprimirUnCharVariasVeces(32,(100-porcentajeDeProgreso));
+        display_imprimirUnCharVariasVeces(219,1);
+    }
+}
+
+
+
+
+
+
+
+
 
 
