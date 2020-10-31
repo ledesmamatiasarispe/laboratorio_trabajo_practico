@@ -30,12 +30,12 @@ typedef int (*employee_CompareBy)(Employee*, Employee*);
  */
 int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet);
 
-/** \brief
+/** \brief muestra un mensaje para ingresar por consola un nombre, apellido ,etc.
  *
- * \param mensaje[] char
- * \param this Employee*
- * \param punteroSet employee_setString
- * \return int
+ * \param mensaje[] char un mensaje que se va a mostrar al momento de ingresar el valor
+ * \param this Employee* el puntero donde se encuentra la estructura
+ * \param punteroSet employee_setString es un funcion que asinga el dato en el un miembro de ka estructura
+ * \return int -1 fallo de parametros. 0 parametros validaron. 1 se pudo asignar el dato correctamente.
  *
  */
 int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet);
@@ -65,4 +65,21 @@ int employee_setNewId(Employee* this,int id);
 Employee* employee_getById(LinkedList* pListaDeEmpleados,int id);
 int employee_getIndexById(LinkedList* pListaDeEmpleados,int id);
 
+
+
+
+/** \brief imprime en consola una tabla con solo un empleado
+ *
+ * \param this Employee* el puntero al empleado a  ser impreso
+ * \return int -1 parametros invalidos, 0 funciono todo correctamente
+ *
+ */
+int employee_imprimirUnaTablaDe1(Employee* this);
+
+
+
+int Employee_swapContents(Employee* element1,Employee* element2);
+
+
+int employee_nombreAformatoCorrecto(char* this);
 #endif // employee_H_INCLUDED

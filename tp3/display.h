@@ -12,4 +12,5 @@ void display_bottomTabla(void);
 void display_topTabla(void);
 
 void display_imprimirUnCharVariasVeces(int caracter, int cantidad);
+
 #endif // DISPLAY_H_INCLUDED

@@ -11,9 +11,10 @@
  */
 int display_PrintEmployeeOnConsole(void* this)
 {
-    int ll = 186;/*chars que voy a usar en el printf*/
+
     int retorno = -1 ;/* retorno de la funcion*/
     if(this != NULL){
+        int ll = 186;/*chars que voy a usar en el printf*/
         retorno = 1;
         int auxId,auxSueldo,auxHorasTrabajadas;
         char auxNombre[50];
@@ -29,7 +30,7 @@ int display_PrintEmployeeOnConsole(void* this)
             retorno = 0;
         }
     }
-return retorno;
+    return retorno;
 }
 
 void employee_cabezeraDeLista()

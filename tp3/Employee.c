@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "display.h"
 #include "LinkedList.h"
-
+#include <ctype.h>
 
 
 ///@brief crea un nuevo eempleado en heap y devuelve su &mdir. Siendo todos los miembros, valores por defecto .
@@ -13,7 +13,7 @@ Employee* employee_new()
 {
     Employee* auxEmployee = NULL;//creo el aux que va contener el puntero localmente
 
-   auxEmployee = (Employee*) malloc(sizeof(Employee)); // le pido a malloc que reserve una porcion de heap y me diga donde la consiguio
+    auxEmployee = (Employee*) malloc(sizeof(Employee)); // le pido a malloc que reserve una porcion de heap y me diga donde la consiguio
 
     return auxEmployee;//retorno la direccion de memoria
 }
@@ -23,23 +23,25 @@ Employee* employee_new()
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* auxEmployee = NULL;
-
-   auxEmployee = employee_new();
-    if(auxEmployee!=NULL)//asigno valores
+    if(idStr != NULL && nombreStr != NULL && horasTrabajadasStr != NULL && sueldoStr != NULL)
     {
-        if(employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr)) != 0 ||
-           employee_setNewId(auxEmployee,atoi(idStr)) != 0 ||
-           employee_setNombre(auxEmployee,nombreStr) != 0 ||
-           employee_setSueldo(auxEmployee,atoi(sueldoStr)) != 0){
-
-
-
-         free(auxEmployee);
-         auxEmployee = NULL;
-
-
+        if((auxEmployee = employee_new())!= NULL)
+        {
+            if(auxEmployee!=NULL)//asigno valores
+            {
+                if
+                (
+                    employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr)) != 0 ||
+                    employee_setNewId(auxEmployee,atoi(idStr)) != 0 ||
+                    employee_setNombre(auxEmployee,nombreStr) != 0 ||
+                    employee_setSueldo(auxEmployee,atoi(sueldoStr)) != 0
+                )
+                {
+                     free(auxEmployee);
+                     auxEmployee = NULL;
+                }
+            }
         }
-
     }
     return auxEmployee;
 }
@@ -55,22 +57,16 @@ int retorno=-1;
  return retorno;
 }
 
-/** \brief muestra un mensaje para ingresar por consola un nombre, apellido ,etc.
- *
- * \param mensaje[] char un mensaje que se va a mostrar al momento de ingresar el valor
- * \param this Employee* el puntero donde se encuentra la estructura
- * \param punteroSet employee_setString es un funcion que asinga el dato en el un miembro de ka estructura
- * \return int -1 fallo de parametros. 0 parametros validaron. 1 se pudo asignar el dato correctamente.
- *
- */
+
 int employee_ingresarString(char mensaje[],Employee* this,employee_setString punteroSet)
 {
     int retorno = -1;
-    char auxInput[1024];
     if(this!=NULL && punteroSet != NULL )//validar parametros
     {
+        char auxInput[1024];
         retorno = 0;//validaron los parametros
-        if(
+        if
+        (
             getValidString(mensaje,"Error! reintente nuevamente",
                            "Error! limite de caracteres superado",auxInput,40,3)==0 &&
             punteroSet(this,auxInput) == 0
@@ -78,7 +74,6 @@ int employee_ingresarString(char mensaje[],Employee* this,employee_setString pun
         {
           retorno = 1;
         }
-
     }
     return retorno;
 }
@@ -87,9 +82,9 @@ int employee_ingresarString(char mensaje[],Employee* this,employee_setString pun
 int employee_ingresarInt(char mensaje[],int max,int min,Employee* this,employee_setInt punteroSet)
 {
     int retorno = -1;
-    int auxInput;
     if(this!=NULL && punteroSet != NULL )//validar parametros
     {
+        int auxInput;
         retorno = 0;//validaron los parametros
         if(
             getValidInt(mensaje,"Error! reintente nuevamente",&auxInput,min,max,3)==0 &&
@@ -132,6 +127,7 @@ int employee_setNombre(Employee* this,char* nombre)
     int retorno = -1;
     if(this!=NULL && nombre != NULL)
     {
+        employee_nombreAformatoCorrecto(nombre);
         retorno = 0;
         strncpy(this->nombre,nombre,40);
     }
@@ -161,6 +157,7 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
     }
     return retorno;
 }
+
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int retorno = -1;
@@ -204,20 +201,16 @@ int employee_CompareByName(Employee* e1, Employee* e2)
 
 int employee_CompareById(Employee* e1, Employee* e2)
 {
-
-    int id1,id2,comparacion,retorno;
-    employee_getId(e1,&id1);
+    int id1,id2,retorno;
     employee_getId(e2,&id2);
-        if(id1 > id2)
+    employee_getId(e1,&id1);
+        if(id1 < id2)
         {
-            retorno = 1;
+            retorno = -1;
         }else
-        {
-            retorno = 0 ;
-        }
-
-
-
+         {
+            retorno = 1 ;
+         }
     return retorno;
 }
 
@@ -225,13 +218,13 @@ int employee_CompareById(Employee* e1, Employee* e2)
 
 int employee_setNewId(Employee* this,int id)
 {
-    static int maxId = 0;
-    int retorno = -1 ;
 
-    /* creo que no tiene sentido guardar este int en memoria dinamica,
-    porque para eso necesitaria un puntero a esa memoria haciendo el todo el esfuerzo inutil */
-    if(this!=NULL){
-    retorno = 1;
+    int retorno = -1 ;
+    static int maxId = 0; /* creo que no tiene sentido guardar este int en memoria dinamica,
+        porque para eso necesitaria un puntero a esa memoria haciendo el todo el esfuerzo inutil */
+    if(this!=NULL)
+    {
+        retorno = 1;
         if(id<=maxId)
         {
                 maxId++;
@@ -242,52 +235,130 @@ int employee_setNewId(Employee* this,int id)
                 maxId = id;
                 employee_setId(this,maxId);
                 retorno = 0;
-
          }
-    }
+    }else
+     {
+        if(id == -1)
+        {
+            maxId = 0;
+        }
+     }
 return retorno;
 }
 
 
 Employee* employee_getById(LinkedList* pListaDeEmpleados,int id)
 {
-    Employee* retorno;
-    int i,len,idActual;
-    len = ll_len(pListaDeEmpleados);
-    for(i=0;i<len;i++){
+    Employee* retorno = NULL;
 
-
-        retorno = (Employee*)ll_get(pListaDeEmpleados,i);
-        if(retorno!=NULL){
-            employee_getId(retorno,&idActual);
-
-            if(idActual == id){
-                break;
+    if(pListaDeEmpleados != NULL && id >= 0)
+    {
+        int i,len,idActual;
+        len = ll_len(pListaDeEmpleados);
+        for(i=0;i<len;i++) /* este for va  a iterar hasta que la lista se haya recorrido por completo o... */
+        {
+           if(( retorno = (Employee*)ll_get(pListaDeEmpleados,i)) != NULL)
+           {
+                employee_getId(retorno,&idActual);
+                if(idActual == id)
+                {
+                    break; /* hasta que se active este break cuando el id coincida */
+                }
             }
+            retorno = NULL;/* la unica forma de llegar a esta linea de codigo es que el id no se haya encontrado.
+            en ese caso, retorno saldria del for con el ultimo empleado cargado en ella. asignandole NULL en esta linea
+            logro que no retorne nada en este caso anterior.   */
         }
-
     }
     return retorno;
 }
 
 int employee_getIndexById(LinkedList* pListaDeEmpleados,int id)
 {
-    Employee* auxEmployee;
-    int i,len,idActual,retorno=-1;
-    if(pListaDeEmpleados!=NULL){
 
+    int retorno = -1;
+    if(pListaDeEmpleados!=NULL)
+    {
+        Employee* auxEmployee;
+        int i,len,idActual;
         len = ll_len(pListaDeEmpleados);
 
-        for(i=0;i<len;i++){
-
-            auxEmployee = (Employee*)ll_get(pListaDeEmpleados,i);
-            employee_getId(auxEmployee,&idActual);
-
-            if(idActual == id){
-                retorno = i;
-                break;
+        for(i=0;i<len;i++)
+        {
+            if((auxEmployee = (Employee*)ll_get(pListaDeEmpleados,i)) != NULL)
+            {
+                if( employee_getId(auxEmployee,&idActual) == 0)
+                {
+                    if(idActual == id)
+                    {
+                        retorno = i;
+                        break;
+                    }
+                }
             }
         }
     }
     return retorno;
+}
+
+
+
+int employee_imprimirUnaTablaDe1(Employee* this)
+{
+    int retorno = -1;
+    if(this!=NULL)
+    {
+        retorno = 0;
+        employee_cabezeraDeLista();
+        display_PrintEmployeeOnConsole(this);
+        display_bottomTabla();
+    }
+return retorno;
+}
+
+
+int Employee_swapContents(Employee* element1,Employee* element2)
+{
+    int retorno= -1 ;
+    if(element2 != NULL && element1 != NULL)
+    {
+        retorno = 0;
+        Employee aux;
+        aux = *element1;
+        *element1 = *element2 ;
+        *element2 = aux;
+    }
+return retorno;
+}
+
+
+
+int employee_nombreAformatoCorrecto(char* this)
+{
+    if(this != NULL)
+    {
+        int i;
+        for(i=0; *(this+i) != '\0';i++)
+        {
+            if(i == 0)/* la primer letra la transformo en mayuscula */
+            {
+               *this = toupper(*this);
+            }else
+             {
+                *(this+i) = tolower(*(this+i));/* en el caso contrario la transformo en minuscula*/
+             }
+
+
+            if( *(this + i) != ' ' && (*(this + i) <'a' || *(this + i) > 'z') && (*(this + i) <'A' || *(this + i) > 'Z'))
+            {
+                *(this+i) = ' ';/* si hay un caracter raro lo transformo en espacio*/
+            }
+
+            if( *(this+i-1) == ' ')
+            {
+                *(this+i) =toupper(*(this+i)); /* si antes hay un espacio lo transformo en mayuscula */
+            }
+        }
+    }
+return 0;
 }

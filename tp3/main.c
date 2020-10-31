@@ -20,6 +20,7 @@
 
 int main()
 {
+
     LinkedList* listaDeEmpleados;
     listaDeEmpleados = ll_newLinkedList();
     int opcionIngresada, ListLen;
@@ -41,9 +42,9 @@ int main()
      "\n11. Salir");
 
     getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
-                &opcionIngresada,0,10,3);
+                &opcionIngresada,0,11,3);
+                clearScreen();
         switch(opcionIngresada){
-            clearScreen();
             case 1: /* cargar del texto */
                 if(ListLen == 0)
                 {
@@ -92,7 +93,12 @@ int main()
                     printf("\n la lista esta vacia! de alta a un empleado o cargue un archivo.\1\n");
                      pause();
                 }else{
-                    controller_editEmployee(listaDeEmpleados);
+                    switch(controller_editEmployee(listaDeEmpleados))
+                    {
+                        case 2:
+                            printf("el empleado no existe");
+                            break;
+                    }
                     pause();
                 }
                 break;
@@ -119,30 +125,31 @@ int main()
                 }
                 break;
 
-                case 7: /* ordenar */
+            case 7: /* ordenar */
                 if(ListLen == 0)
                 {
                     printf("\n no se puede ordenar\n "
                            "la lista esta vacia! cargue un archivo.\1\n");
-                     pause();
+                    pause();
                 }else{
                     printf("opciones :  \n1. ordenar por nombre de a-z"
                                         "\n2. ordenar por id ");
-                     getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
+                    getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
                                     &opcionIngresada,1,2,3);
-                     clearScreen();
-                    switch(opcionIngresada){
+                    clearScreen();
+                    switch(opcionIngresada)
+                    {
 
-                    case 1:
-                        controller_sortEmployee(listaDeEmpleados,employee_CompareByName);
-                        printf("\n el archivo se  ordeno por nombre");
-                        pause();
-                    break;
-                     case 2:
-                        controller_sortEmployee(listaDeEmpleados,employee_CompareById);
-                        printf("\n el archivo se  ordeno por id");
-                        pause();
-                    break;
+                        case 1:
+                            controller_sortEmployee(listaDeEmpleados,employee_CompareByName);
+                            printf("\n el archivo se  ordeno por nombre");
+                            pause();
+                            break;
+                        case 2:
+                            controller_sortEmployee(listaDeEmpleados,employee_CompareById);
+                            printf("\n el archivo se  ordeno por id");
+                            pause();
+                            break;
 
                     }
                 }
@@ -180,7 +187,7 @@ int main()
                 if(ListLen == 0)
                 {
                     printf("la lista ya esta vacia.\1\n");
-                        pause();
+                    pause();
                 }else{
                     if(controler_vaciarLinkedList(listaDeEmpleados) == 0)
                     {
@@ -190,19 +197,7 @@ int main()
                 }
                 break;
         }/* switch*/
-
-
-
-
     } while(opcionIngresada!=11);
-
-
-
-
-
-
-
-
 
     return 0;
 }
