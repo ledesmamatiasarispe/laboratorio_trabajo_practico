@@ -20,12 +20,14 @@
 *****************************************************/
 
 
+
+
 int main()
 {
 
     LinkedList* listaDeEmpleados;
     listaDeEmpleados = ll_newLinkedList();
-    int opcionIngresada, ListLen;
+    int opcionIngresada;
 
     do{
     clearScreen();
@@ -43,7 +45,7 @@ int main()
 
     getValidInt("\ningrese una opcion de la lista [ ]\b\b","\n error! opcion fuera de rango",
                 &opcionIngresada,0,11,3);
-                clearScreen();
+                //clearScreen();
         switch(opcionIngresada){
             case 1:
                 opcion_cargarEmpleadosDesdeCsv("data.csv",listaDeEmpleados);

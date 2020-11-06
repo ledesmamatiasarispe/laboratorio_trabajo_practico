@@ -32,11 +32,12 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
                 if
                 (
                     employee_setHorasTrabajadas(auxEmployee,atoi(horasTrabajadasStr)) != 0 ||
-                    employee_setNewId(auxEmployee,atoi(idStr)) != 0 ||
+                    employee_setId(auxEmployee,atoi(idStr)) != 0 ||
                     employee_setNombre(auxEmployee,nombreStr) != 0 ||
                     employee_setSueldo(auxEmployee,atoi(sueldoStr)) != 0
                 )
                 {
+
                      free(auxEmployee);
                      auxEmployee = NULL;
                 }
@@ -220,28 +221,44 @@ int employee_setNewId(Employee* this,int id)
 {
 
     int retorno = -1 ;
-    static int maxId = 0;
+    int maxId = 0;
     if(this!=NULL)
     {
-        retorno = 1;
-        if(id<=maxId)
+        FILE* pfile;
+        if((pfile = fopen("maxID.bin","rb")) != NULL)
         {
-                maxId++;
-                employee_setId(this,maxId);
-                retorno = 0;
+            if(fread(&maxId,sizeof(int),1,pfile) == 1)
+            {
 
-        }else{
-                maxId = id;
-                employee_setId(this,maxId);
-                retorno = 0;
-         }
-    }else
-     {
-        if(id == -1)
-        {
-            maxId = 0;
-        }
-     }
+                printf("max id%d",maxId);
+                retorno = 1;
+                if(id<=maxId)
+                {
+                    maxId++;
+                    employee_setId(this,maxId);
+                    retorno = 0;
+
+                }else{
+                    maxId = id;
+                    employee_setId(this,maxId);
+                    retorno = 0;
+                }
+            }
+            fclose(pfile);
+                if((pfile = fopen("maxID.bin","wb")) != NULL)
+                {
+                    printf("abrio2");
+                    printf("max id%d",maxId);
+                    if(fwrite(&maxId,sizeof(int),1,pfile) != 1)
+                    {
+                        printf("no guardo");
+                        retorno = 2;
+                    }
+                }
+            }
+
+      fclose(pfile);
+    }
 return retorno;
 }
 

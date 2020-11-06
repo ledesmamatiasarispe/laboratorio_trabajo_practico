@@ -42,10 +42,12 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
             datosEscaneados = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",auxId,auxNombre,auxHoras,auxSueldo);
             if(datosEscaneados=4)
             {
+
                 /*  employee crea un nuevo empleado en heap y luego le asigna los valores
                 tomados por el fscanf. luego ll_add añade ese *empleado a la llist  */
                 if((AuxEmployee = employee_newParametros(auxId,auxNombre,auxHoras,auxSueldo))!=NULL)
                 {
+
                     ll_add(pArrayListEmployee,AuxEmployee);
                     retorno = 0;
                 }

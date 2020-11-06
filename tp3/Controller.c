@@ -13,7 +13,6 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     {
         FILE* pFile;
         retorno=1;
-
         if( (pFile = fopen(path,"r")) != NULL)
         {
             retorno=2;
@@ -375,12 +374,11 @@ int retorno = -1;
                 free(element);
             }else
              {
-                 retorno =2;
+                 retorno = 2;
                  break;
              }
         }
         ll_clear(list);
-        employee_setNewId(NULL,-1);
     }
 return retorno;
 }

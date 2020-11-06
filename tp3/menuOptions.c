@@ -10,8 +10,10 @@ int opcion_cargarEmpleadosDesdeCsv(char path[], LinkedList* list)
         retorno = 1;
         if(ListLen == 0)
         {
+
             if(controller_loadFromText(path,list) == 0)
             {
+
                 printf("data.csv se cargo correctamente");
                 pause();
                 retorno = 0;
