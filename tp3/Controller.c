@@ -72,7 +72,6 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
         auxEmployee =  employee_new();
         if(auxEmployee!=NULL)
         {
-            employee_getId(auxEmployee,&id);
             if
             (
                 employee_setNewId(auxEmployee,id) == 0 &&

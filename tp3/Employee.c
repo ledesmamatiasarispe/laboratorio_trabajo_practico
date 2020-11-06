@@ -217,6 +217,39 @@ int employee_CompareById(Employee* e1, Employee* e2)
 
 
 
+int getMaxIdFromBIN(char patch[] , int *maxId)
+{
+    int retorno = -1;
+    FILE* pfile;
+        if((pfile = fopen(patch,"rb")) != NULL)
+        {
+            if(fread(maxId,sizeof(int),1,pfile) == 1)
+            {
+                retorno = 0;
+            }
+        }
+        fclose(pfile);
+    return retorno;
+}
+
+int saveMaxIdtoBin(char patch[] , int maxId)
+{
+    int retorno = -1;
+    FILE* pfile;
+        if((pfile = fopen(patch,"wb")) != NULL)
+        {
+            if(fwrite(&maxId,sizeof(int),1,pfile) != 1)
+            {
+                retorno = 2;
+            }
+        }
+      fclose(pfile);
+    return retorno;
+}
+
+
+
+
 int employee_setNewId(Employee* this,int id)
 {
 
@@ -224,43 +257,46 @@ int employee_setNewId(Employee* this,int id)
     int maxId = 0;
     if(this!=NULL)
     {
+        pause();
         FILE* pfile;
-        if((pfile = fopen("maxID.bin","rb")) != NULL)
-        {
-            if(fread(&maxId,sizeof(int),1,pfile) == 1)
+       if( getMaxIdFromBIN("maxID.bin", &maxId) == 0)
+       {
+            retorno = 1;
+            if(id<=maxId)
             {
+                maxId++;
+                employee_setId(this,maxId);
+                retorno = 0;
 
-                printf("max id%d",maxId);
-                retorno = 1;
-                if(id<=maxId)
-                {
-                    maxId++;
-                    employee_setId(this,maxId);
-                    retorno = 0;
+            }else{
+                maxId = id;
+                employee_setId(this,maxId);
+                retorno = 0;
+            }
+        }
+        saveMaxIdtoBin("maxID.bin" , maxId);
+        /*
+        if((pfile = fopen("maxID.bin","wb")) != NULL)
+        {
+            if(fwrite(&maxId,sizeof(int),1,pfile) != 1)
+            {
+                printf("no guardo");
+                retorno = 2;
+            }
 
-                }else{
-                    maxId = id;
-                    employee_setId(this,maxId);
-                    retorno = 0;
-                }
-            }
-            fclose(pfile);
-                if((pfile = fopen("maxID.bin","wb")) != NULL)
-                {
-                    printf("abrio2");
-                    printf("max id%d",maxId);
-                    if(fwrite(&maxId,sizeof(int),1,pfile) != 1)
-                    {
-                        printf("no guardo");
-                        retorno = 2;
-                    }
-                }
-            }
+        }
+
 
       fclose(pfile);
+
+
+      */
     }
+
 return retorno;
 }
+
+
 
 
 Employee* employee_getById(LinkedList* pListaDeEmpleados,int id)
