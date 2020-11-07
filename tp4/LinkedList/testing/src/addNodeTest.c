@@ -47,7 +47,7 @@ void addNodeTestCase01(void)
 
     list = ll_newLinkedList();
     test_addNode(list,0,NULL);
-    utest_assertEqualsIntMsg(1,list->size,"\nError en el valor de size de la lista se debe incrementar al agregar nodos\n");
+    utest_assertEqualsIntMsg(list->size,1,"\nError en el valor de size de la lista se debe incrementar al agregar nodos\n");
 
 }
 
