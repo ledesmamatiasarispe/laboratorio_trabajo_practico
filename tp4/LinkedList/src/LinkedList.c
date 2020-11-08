@@ -289,17 +289,30 @@ int ll_remove(LinkedList* this,int index)
         int len;
         if((len = ll_len(this)) > 0 &&  index < len && index >= 0 )
         {
-            Node *nodeActual;
-            if((nodeActual = getNode(this,index)) != NULL)
+            Node *nextNode , *prevNode ,*actualNode ;
+
+            if(( actualNode = getNode(this,index)) != NULL)
             {
+                nextNode = actualNode->pNextNode;
+                actualNode->pNextNode = NULL;
+                if(index == 0)
+                {
 
+                    this->pFirstNode = nextNode;
+                    free(actualNode);
+                    returnAux = 0;
+                    this->size --;
+                }else//index != 0
+                 {
 
-
-
-
-
-                nodeActual->pElement = pElement;
-                returnAux = 0;
+                    if(( prevNode = getNode(this,index-1)) != NULL)
+                    {
+                        prevNode->pNextNode = nextNode;
+                        free(actualNode);
+                        returnAux = 0;
+                        this->size --;
+                    }
+                 }
             }
         }
     }
@@ -317,10 +330,24 @@ int ll_remove(LinkedList* this,int index)
 int ll_clear(LinkedList* this)
 {
     int returnAux = -1;
-    Node* nodo;
-    int i;
-
-
+    if(this != NULL )
+    {
+        int len;
+        if((len = ll_len(this)) > 0 )
+        {
+            int i;
+            for(i= len -1;i >= 0 ; i--)
+            {
+                if(ll_remove(this,i)==0)
+                {
+                    returnAux = 0;
+                }else
+                 {
+                     returnAux = 1;
+                 }
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -335,8 +362,14 @@ int ll_clear(LinkedList* this)
 int ll_deleteLinkedList(LinkedList* this)
 {
     int returnAux = -1;
-
-
+    if(this != NULL )
+    {
+        if(ll_clear(this) == 0)
+        {
+            free(this);
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
@@ -351,11 +384,22 @@ int ll_deleteLinkedList(LinkedList* this)
 int ll_indexOf(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    int i;
-    Node* nodo;
-
-
-
+    if(this != NULL )
+    {
+        int len;
+        if((len = ll_len(this)) > 0 )
+        {
+            int i;
+            for(i= 0;i < len ; i++)
+            {
+                if(ll_get(this,i) == pElement)
+                {
+                    returnAux = i;
+                    break;
+                }
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -397,9 +441,17 @@ int ll_isEmpty(LinkedList* this)
 int ll_push(LinkedList* this, int index, void* pElement)
 {
     int returnAux = -1;
-
-
-
+    if(this != NULL )
+    {
+        int len;
+        if((len = ll_len(this)) >= 0  &&  index <= len && index >= 0 )
+        {
+            if(addNode(this,index,pElement) == 0 )
+            {
+                returnAux = 0;
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -409,7 +461,7 @@ int ll_push(LinkedList* this, int index, void* pElement)
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion del elemento eliminar
  * \return void* Retorna    (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
-                            (pElement) Si funciono correctamente
+                            (pElement) Si funciono correctamente, ¡¡aunque pElement puede ser valido aún siendo NULL.!!
  *
  */
 void* ll_pop(LinkedList* this,int index)
@@ -420,18 +472,14 @@ void* ll_pop(LinkedList* this,int index)
         int len;
         if((len = ll_len(this)) > 0 &&  index < len && index >= 0 )
         {
-            Node *next , *prev;
-           if((returnAux = getNode(this,index)) != NULL)
-
-
-
-
+            returnAux = ll_get(this,index);
+            ll_remove(this,index);
         }
     }
-
     return returnAux;
 }
 
+// TODO (arisp#1#): revisar ll_contains
 
 /** \brief  Determina si la lista contiene o no el elemento pasado como parametro
  *
@@ -444,8 +492,29 @@ void* ll_pop(LinkedList* this,int index)
 int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
+    if(this != NULL )
+    {
+        int len;
+        if((len = ll_len(this)) > 0)
+        {
 
-
+            int i;
+            for(i = 0 ; i<len ; i++)
+            {
+                if(pElement == ll_get(this,i))
+                {
+                    returnAux = 1;
+                    break;
+                }else
+                {
+                    returnAux = 0;
+                }
+            }
+        }else
+        {
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
