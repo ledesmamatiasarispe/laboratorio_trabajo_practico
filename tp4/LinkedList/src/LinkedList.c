@@ -62,21 +62,9 @@ static Node* getNode(LinkedList* this, int nodeIndex)
             if(((pNode = this -> pFirstNode) != NULL))
             {
                 int i ;
-                for(i = 0 ; i != nodeIndex ; i ++)
+                for(i = 0 ; i != nodeIndex && i < len; i ++)
                 {
-                    /*
-                    if( i == nodeIndex)
-                    {
-                        break;
-                    }else
-                    {
-                       if((*/pNode = pNode->pNextNode;/*) == NULL)
-                       {
-                           break;
-                       }
-
-                    }
-                    */
+                    pNode = pNode->pNextNode;
                 }
             }
         }
@@ -533,10 +521,34 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
-    int i;
-    Node* nodo;
+    if(this != NULL && this2 != NULL )
+    {
+        int len , len2;
+        if(((len = ll_len(this)) >= 0) && ((len2 = ll_len(this2)) >= 0))
+        {
 
+            int i,cContenidos = 0;
+            void *pElementfromThis2;
 
+            for(i=0 ; i< len2 ; i++)
+            {
+                if((pElementfromThis2 = ll_get(this2,i)) )
+                {
+                   if( ll_contains(this,pElementfromThis2) == 1)
+                   {
+                       cContenidos++;
+                   }
+                }
+            }
+            if(cContenidos==len2)
+            {
+                returnAux = 1;
+            }else
+            {
+                returnAux = 0;
+            }
+        }
+    }
     return returnAux;
 }
 
@@ -553,13 +565,39 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
-    int i;
-    void* pElement;
-
-
+    if(this != NULL && from >= 0 && from <= to  )
+    {
+        int len;
+        if((len = ll_len(this)) > 0 && to < len)
+        {
+            int i ;
+            LinkedList* auxLinkedList;
+             if((auxLinkedList = ll_newLinkedList()) != NULL)
+             {
+                void *PelementCopiado;
+                int cantidadDeElementosCopiados = 0;
+                for(i= from; i <= to; i++)
+                {
+                   PelementCopiado = ll_get(this,i);
+                   if(ll_add(auxLinkedList,PelementCopiado) == 0)
+                   {
+                       cantidadDeElementosCopiados++;
+                   }
+                }
+                   cloneArray = auxLinkedList;
+            }
+        }
+    }
     return cloneArray;
 }
+/*
+    El test 1 de sublist verifica si la  funcion ll_sublist retorna el puntero a la nueva lista. el problema es que para hacer esto,
+     utiliza una lista que contiene solo un node y la funcion ll_sublist la llama con los paramteros ll_sublist(list,0,1). pidiendole que copia una lista de 2 nodos: 0 y 1.
+      desde  una lista con un solo nodo. por lo tanto provoca que no pase de la segunda verificacion de parametros  => "to < len".
 
+
+
+*/
 
 
 /** \brief Crea y retorna una nueva lista con los elementos de la lista pasada como parametro
@@ -571,6 +609,12 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
+    if(this != NULL)
+    {
+        int len;
+        len = ll_len(this);
+        cloneArray =  ll_subList(this,0,len-1);
+    }
 
 
     return cloneArray;
@@ -587,10 +631,58 @@ LinkedList* ll_clone(LinkedList* this)
 int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 {
     int returnAux =-1;
-    void* pAux;
+    if(this != NULL && pFunc != NULL && (order == 0 || order == 1))
+    {
+        int i,j,condDeOrdenamiento;
+        void *element1, *element2;
+        int len;
+        if((len = ll_len(this)) > 0)
+        {
+            for(i = 0 ; i < len-1;i++)
+            {
+                for(j= i+1 ; j<len ; j++)
+                {
+                    element1 = ll_get(this,i);
+                    element2 = ll_get(this,j);
 
-
-
+                    condDeOrdenamiento = pFunc(element1,element2);
+                    if((condDeOrdenamiento < 0 && order == 0 ) || (condDeOrdenamiento > 0 && order == 1 ))
+                    {
+                        ll_set(this,j,element1);
+                        ll_set(this,i,element2);
+                    }
+                }
+            }
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
